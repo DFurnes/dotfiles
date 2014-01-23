@@ -27,8 +27,8 @@ zstyle ':prezto:load' pmodule \
   'terminal' \
   'directory' \
   'completion' \
-  'prompt'
-# 'git'
+  'prompt' \
+  'git'
 
 # 'environment' \
 # 'terminal' \
