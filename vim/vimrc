@@ -1,0 +1,84 @@
+colorscheme base16-tomorrow
+set background=dark 
+
+set nocp  " we don't wanna be vi compatible.
+
+
+map <Insert> <nop>
+map <kInsert> <nop>
+
+
+" Syntax highlighting
+" -------------------
+syntax on
+filetype off
+filetype indent on
+filetype plugin on
+
+
+" Indentation / Tab settings
+" --------------------------
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set backspace=2
+set autoindent
+set smartindent
+set nocindent
+
+
+" Line numbers
+" ------------ 
+set ruler " show line numbers
+set relativenumber " relative line numbers
+set number " shows current line as absolute line number (Vim 7.4+)
+set cul " highlights current line
+
+" Search
+" ------
+set incsearch " highlight matches as we search
+set hlsearch " keep search highlights after search
+set ignorecase " ignore case when searching
+set smartcase " ...but make it case-sensitive if not all lowercase
+
+nmap <leader>h :nohlsearch<cr> " shortcut to hide search highlights
+
+" Splits
+" ------
+set splitbelow
+set splitright
+
+" shortcuts to switch between splits 
+nnoremap sh <C-w>h
+nnoremap sl <C-w>l
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+
+
+" Code Folding
+" ------------
+setlocal foldmethod=indent
+set nofoldenable " but don't fold until asked
+nnoremap <Space> za
+
+
+
+imap jj <Esc> " shortcut to get out of insert mode... meh.
+
+execute pathogen#infect()
+call pathogen#helptags()
+
+runtime macros/matchit.vim " enhances built-in % command to allow jumping between opening/closing keywords
+
+set runtimepath^=~/.vim/bundle/ctrlp.vim " ctrl-p plugin for Command-T like functionality
+let g:ctrlp_map = '<c-p>'
+set wildignore+=*/tmp/*,*/node_modules/*,*/.sass_cache/*,*.so,*.swp,*.zip     " Linux/MacOSX
+
+set laststatus=2
+set encoding=utf-8
+
+if has("gui_running")
+  set guioptions-=T
+  set guioptions-=L
+  set guioptions-=R
+endif

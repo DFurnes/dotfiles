@@ -1,0 +1,95 @@
+#
+# Executes commands at the start of an interactive session.
+#
+
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# set up rbenv
+eval "$(rbenv init - zsh)"
+
+# VIM MODE
+set -o vi
+
+# completion
+# case-insensitive (all),partial-word and then substring completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
+    'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+set completion-ignore-case On
+
+# Basic aliases
+alias ls="ls -GFh"
+alias ll="ls -GFhl"
+
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+alias vimrc="mvim ~/.vimrc"
+alias zshrc="mvim ~/.zshrc"
+alias zshenv="mvim ~/.zshenv"
+
+alias http="http-server"
+
+
+# Searching aliases
+function findd() { find . -name $* -type d } # usage: findd "regex_string"; ex: findd "*neue*"
+function findf() { grep -nr $* . }  # usage: findf "search_string"
+
+
+# OS X aliases
+alias ql='qlmanage -p "$@" & > /dev/null'
+alias oo="open ." # open current directory in OS X Finder
+function port() { sudo lsof -i :$*; } # check what's running on this port
+function trash() { mv $1 ~/.Trash } # move file to the trash
+
+
+git-branch-current() {
+  if ! git rev-parse 2> /dev/null; then
+    print "$0: not a repository: $PWD" >&2
+    return 1
+  fi
+
+  local ref="$(git symbolic-ref HEAD 2> /dev/null)"
+
+  if [[ -n "$ref" ]]; then
+    print "${ref#refs/heads/}"
+    return 0
+  else
+    return 1
+  fi
+}
+
+
+
+# Git aliases
+alias g="git"
+alias gs="git status"
+alias gst="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gdiff="git difftool"
+alias gb="git branch"
+alias gch="git checkout"
+alias gcb="git checkout -b"
+alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glgg="git log"
+alias gp="git push"
+alias gpl="git pull"
+gpr() {
+  hub browse -- compare/$(git-branch-current)
+}
+gpu() { git push --set-upstream origin $(git-branch-current) } 
+gsync() { git fetch upstream && git checkout dev && git rebase upstream/dev && git push origin dev } 
+
+# misc aliases
+alias be="bundle exec"
+alias sass-watch='sass --watch --compass ds_campaign.sass:ds_campaign.css'
+
+# Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# Added MAMP utilities to path
+export PATH="/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.3.14/bin:$PATH"
