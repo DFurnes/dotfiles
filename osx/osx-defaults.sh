@@ -5,7 +5,7 @@ sudo scutil --set HostName "DFurnes"
 sudo scutil --set LocalHostName "DFurnes"
 
 # Make Mission Control animation quicker
-defaults write com.apple.dock expose-animation-duration -float 0.15
+defaults write com.apple.dock expose-animation-duration -float 0.25
 
 # Set dock icon size
 defaults write com.apple.dock tilesize -int 46
@@ -50,7 +50,3 @@ defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-
-# Install QuickLook plugins for 
-brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json quicklook-csv
-qlmanage -r
