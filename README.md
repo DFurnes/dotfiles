@@ -1,4 +1,4 @@
 dotfiles by dfurnes
 =======================
 
-locally sourced, organic artisinal dotfiles. this is how i write such nice css.
+My configuration files for ZSH, Vim, OS X, and Alfred. This is how I write such nice CSS.
