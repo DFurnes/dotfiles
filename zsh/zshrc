@@ -20,6 +20,10 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 set completion-ignore-case On
 
+
+# Fixes completion issues on certain tools
+alias bower='noglob bower'
+
 # Basic aliases
 alias ls="ls -GFh"
 alias ll="ls -GFhl"
@@ -46,10 +50,17 @@ function port() { sudo lsof -i :$*; } # check what's running on this port
 function trash() { mv $1 ~/.Trash } # move file to the trash
 
 
+# Vagrant aliases
+alias v="vagrant"
+alias vst="vagrant status"
+alias vup="vagrant up"
+alias vsp="vagrant suspend"
+
+
 # Git aliases
 alias g="git"
 alias gs="git status"
-alias gst="git status"
+alias gst="git status -sb"
 alias ga="git add"
 alias gc="git commit"
 alias gdiff="git difftool"
