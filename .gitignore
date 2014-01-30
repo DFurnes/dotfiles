@@ -1,4 +1,7 @@
 .DS_Store
 .svn
 *~
-.*.swp
+
+# vim
+vim/swp
+.netrwhist

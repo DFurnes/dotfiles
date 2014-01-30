@@ -3,7 +3,7 @@ set background=dark
 
 set nocp  " we don't wanna be vi compatible.
 
-set directory^=$HOME/.swp// " save swap out of the way
+set directory=$HOME/.dotfiles/vim/swp// " save swap out of the way
 
 
 map <Insert> <nop>
