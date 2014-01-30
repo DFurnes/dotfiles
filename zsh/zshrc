@@ -71,6 +71,9 @@ alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset 
 alias glgg="git log"
 alias gp="git push"
 alias gpl="git pull"
+ghub() {
+  hub browse
+}
 gpr() {
   hub browse -- compare/$(git-branch-current)
 }
