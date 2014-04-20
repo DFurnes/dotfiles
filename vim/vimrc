@@ -1,21 +1,107 @@
+set nocp  " we don't wanna be vi compatible.
+
+" Vundle 
+" -----------
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'rking/ag.vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'tpope/vim-eunuch'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-surround'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'christoomey/vim-tmux-navigator'
+
+
+" Leader
+" -----
+" Set leader to ',' since its easier to type
+let mapleader = ","
+
+" shortcut to get out of insert mode.
+imap jj <Esc>
+
+
+" Swap, backup, and undo
+" ----------------------
+set backupdir^=~/.vim/backups//
+set undodir=~/.vim/undodir
+
+" disable swap file
+set noswapfile
+
+set undofile " enables peristent undo (keeps history on file reload)
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+
+
+" Opening/closing files
+" ---------------------
+" Remember last location in file (except git commit prompt)
+au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
+   \| exe "normal! g`\"" | endif
+
+" automatically read a file that has changed on disk
+set autoread
+
+" close vim if nerdtree is only window open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q
+
+" <ctrl>-n to open nerdtree
+map <C-n> :NERDTreeToggle<CR>
+
+" ignores for ctrl-p
+set wildignore+=*/tmp/*,*/vendor/*,*/dist/*,*/node_modules/*,*/html/*,*/.sass_cache/*,*.so,*.swp,*.zip     " Linux/MacOSX
+
+" create/edit file in current directory
+nmap :ed :edit %:p:h/
+
+
+" Color scheme & syntax highlighting
+" ----------------------------------
 colorscheme base16-tomorrow
 set background=dark 
 
-set nocp  " we don't wanna be vi compatible.
+" fix background display issue in tmux
+set t_ut=
 
-set directory=$HOME/.dotfiles/vim/swp// " save swap out of the way
-
-
-map <Insert> <nop>
-map <kInsert> <nop>
-
-
-" Syntax highlighting
-" -------------------
 syntax on
 filetype off
 filetype indent on
 filetype plugin on
+
+" json syntax highlighting
+au BufNewFile,BufRead *.json set ft=javascript
+
+" jbuilder syntax highlighting
+au BufNewFile,BufRead Brewfile set ft=sh
+
+" jbuilder syntax highlighting
+au BufNewFile,BufRead *.json.jbuilder set ft=ruby
+
+" syntax highlighting for *.md files
+au BufRead,BufNewFile *.md set filetype=markdown
+
+" syntax highlighting for Lo-dash template files (.tpl.html)
+autocmd BufRead,BufNewFile *.tpl.html set filetype=eruby.html
+
+set showmatch " show matching brackets
+
+
+" Code Completion
+" ---------------
+set omnifunc=syntaxcomplete#Complete
+
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+
+" TernJS things
+nmap <leader>d :TernDef
+nmap <leader>f :TernDoc
 
 
 " Indentation / Tab settings
@@ -28,6 +114,11 @@ set autoindent
 set smartindent
 set nocindent
 
+set scrolloff=5 " keep 5 lines above/below the cursor when scrolling
+
+" use tabs in makefiles 
+au FileType make setlocal noexpandtab
+
 
 " Line numbers
 " ------------ 
@@ -36,6 +127,7 @@ set relativenumber " relative line numbers
 set number " shows current line as absolute line number (Vim 7.4+)
 set cul " highlights current line
 
+
 " Search
 " ------
 set incsearch " highlight matches as we search
@@ -43,7 +135,24 @@ set hlsearch " keep search highlights after search
 set ignorecase " ignore case when searching
 set smartcase " ...but make it case-sensitive if not all lowercase
 
-nmap <leader>h :nohlsearch<cr> " shortcut to hide search highlights
+" shortcut to hide search highlights
+nmap <leader>h :nohlsearch<cr> 
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+map <C-p> :CtrlP<cr>
+map <C-t> :CtrlPBufTag<cr>
+
 
 " Splits
 " ------
@@ -57,25 +166,8 @@ nnoremap sj <C-w>j
 nnoremap sk <C-w>k
 
 
-" Code Folding
-" ------------
-setlocal foldmethod=indent
-set nofoldenable " but don't fold until asked
-nnoremap <Space> za
-
-
-
-imap jj <Esc> " shortcut to get out of insert mode... meh.
-
-execute pathogen#infect()
-call pathogen#helptags()
-
-runtime macros/matchit.vim " enhances built-in % command to allow jumping between opening/closing keywords
-
-set runtimepath^=~/.vim/bundle/ctrlp.vim " ctrl-p plugin for Command-T like functionality
-let g:ctrlp_map = '<c-p>'
-set wildignore+=*/tmp/*,*/node_modules/*,*/.sass_cache/*,*.so,*.swp,*.zip     " Linux/MacOSX
-
+" Misc
+" ----
 set laststatus=2
 set encoding=utf-8
 

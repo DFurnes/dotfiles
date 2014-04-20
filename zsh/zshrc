@@ -11,6 +11,12 @@ fi
 # set up rbenv
 eval "$(rbenv init - zsh)"
 
+# set up nodenv
+eval "$(nodenv init -)"
+
+# set up php-version
+source $(brew --prefix php-version)/php-version.sh && php-version 5
+
 # VIM MODE
 set -o vi
 
@@ -25,8 +31,12 @@ set completion-ignore-case On
 alias bower='noglob bower'
 
 # Basic aliases
+alias l="ls -GFh"
 alias ls="ls -GFh"
 alias ll="ls -GFhl"
+
+alias t="tree -L 2 -I node_modules"
+alias tl="tree -I node_modules"
 
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -49,12 +59,35 @@ alias oo="open ." # open current directory in OS X Finder
 function port() { sudo lsof -i :$*; } # check what's running on this port
 function trash() { mv $1 ~/.Trash } # move file to the trash
 
+# open multiple vim files in tabs
+alias vim="vim -p"
+alias mvim="mvim -p"
+
+
+# Clear alias
+alias c="clear"
 
 # Vagrant aliases
 alias v="vagrant"
 alias vst="vagrant status"
 alias vup="vagrant up"
 alias vsp="vagrant suspend"
+alias vre="vagrant halt && vagrant reload"
+
+ds() { vagrant ssh -c "cd /vagrant && ds $*" }
+drush() { v ssh -c "cd /vagrant/html && drush $*" }
+neue-sync() {
+  cd $HOME/Sites/neue
+  grunt prod
+
+  rm -rf $HOME/Sites/dosomething/lib/themes/dosomething/paraneue_dosomething/bower_components/neue
+  mkdir $HOME/Sites/dosomething/lib/themes/dosomething/paraneue_dosomething/bower_components/neue
+  cp -r dist/* $HOME/Sites/dosomething/lib/themes/dosomething/paraneue_dosomething/bower_components/neue
+
+  cd -
+
+  echo "Built dist package and copied into DS app."
+}
 
 
 # Git aliases
@@ -63,7 +96,7 @@ alias gs="git status"
 alias gst="git status -sb"
 alias ga="git add"
 alias gc="git commit"
-alias gdiff="git difftool"
+alias gdiff="git diff"
 alias gb="git branch"
 alias gch="git checkout"
 alias gcb="git checkout -b"
@@ -71,6 +104,7 @@ alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset 
 alias glgg="git log"
 alias gp="git push"
 alias gpl="git pull"
+alias gclean="git fetch --prune --all && git branch --merged dev | grep -v 'dev' | xargs git branch -d && git branch"
 ghub() {
   hub browse
 }
@@ -78,6 +112,7 @@ gpr() {
   hub browse -- compare/$(git-branch-current)
 }
 gpu() { git push --set-upstream origin $(git-branch-current) } 
+gpuf() { git push --set-upstream origin $(git-branch-current) --force } 
 gsync() { git fetch upstream && git checkout dev && git rebase upstream/dev && git push origin dev } 
 
 # misc aliases
@@ -86,6 +121,3 @@ alias sass-watch='sass --watch --compass ds_campaign.sass:ds_campaign.css'
 
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-
-# Added MAMP utilities to path
-export PATH="/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.3.14/bin:$PATH"

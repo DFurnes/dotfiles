@@ -2,6 +2,9 @@
 # Executes commands at login pre-zshrc.
 #
 
+# Tmux
+# Set $TERM explicitly to force tmux to recognize 256 colors
+export TERM=screen-256color-bce
 
 # Browser
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -30,6 +33,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the the list of directories that cd searches.
 cdpath=(
   $HOME/Sites 
+  $HOME/Sites/dosomething/html/profiles/dosomething/themes/dosomething
   $cdpath
 )
 
@@ -37,12 +41,15 @@ cdpath=(
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/.rbenv/shims 
-  /usr/local/share/npm/bin
+  $HOME/.nodenv/bin
   /usr/local/{bin,sbin}
   /{bin,sbin}
   /usr/{bin,sbin}
   $path
 )
+
+# add homebrew PHP to path
+export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
 
 
 # Set the default Less options.
