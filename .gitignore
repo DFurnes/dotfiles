@@ -9,5 +9,5 @@ vim/undodir
 .netrwhist
 
 # vundle
-bundle/**
-~bundle/vundle
+bundle/
+!bundle/vundle
