@@ -90,7 +90,7 @@ au BufNewFile,BufRead *.json.jbuilder set ft=ruby
 au BufRead,BufNewFile *.md set filetype=markdown
 
 " syntax highlighting for Lo-dash template files (.tpl.html)
-autocmd BufRead,BufNewFile *.tpl.html set filetype=eruby.html
+au BufRead,BufNewFile *.tpl.html set filetype=eruby.html
 
 set showmatch " show matching brackets
 
