@@ -18,35 +18,12 @@ read -p "Press any key to begin installing things...\n"
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 # Install Homebrew packages
-brew install hub # Github command line tool, used in some aliases
-brew install imagemagick
-brew install jp2a # JPEG to ASCII art, important productivity tool
-brew install macvim # GUI for Vim
-brew install node
-brew install openssl 
-brew install phantomjs
-brew install pngcrush
-brew install redis
-brew install rename # allows renaming files based on regex
-brew install tree # ls alternative that graphically shows file tree
-brew install vim # upgrade to Vim 7.4
-brew install webkit2png # take screenshots of websites
-brew install wget # download things unix-style!
-brew install yuicompressor # compress things!
-brew install zsh # the best shell!
+brew bundle Brewfile
 
-# Install rbenv and ruby-build
-brew install rbenv
-brew install ruby-build
+# Refresh Quicklook with newly installed plugins
+qlmanage -r
 
+# Install ruby versions!
 ruby-build 1.9.3-p448
 ruby-build 2.0.0-p247
 rbenv global 2.0.0-p247
-
-# Install Brew Cask
-brew tap phinze/cask
-brew install brew-cask
-
-# Install QuickLook plugins for common filetypes
-brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json quicklook-csv
-qlmanage -r

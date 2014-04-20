@@ -1,0 +1,35 @@
+# Brewfile
+
+# Tap additional sources 
+tap phinze/cask
+tap josegonzalez/homebrew-php
+tap homebrew/versions
+
+# Install Cask
+install brew-cask
+
+# Install things!
+install hub # Github command line tool, used in some aliases
+install imagemagick
+install jp2a # JPEG to ASCII art, important productivity tool
+install macvim # GUI for Vim
+install node
+install openssl 
+install phantomjs
+install pngcrush
+install redis
+install rename # allows renaming files based on regex
+install tree # ls alternative that graphically shows file tree
+install vim # upgrade to Vim 7.4
+install webkit2png # take screenshots of websites
+install wget # download things unix-style!
+install yuicompressor # compress things!
+install zsh # the best shell!
+install the_silver_searcher # search tool
+
+# Install rbenv and ruby-build
+install rbenv
+install ruby-build
+
+# Install QuickLook plugins for common filetypes
+cask install qlcolorcode qlstephen qlmarkdown quicklook-json quicklook-csv
