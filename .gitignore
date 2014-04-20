@@ -4,4 +4,10 @@
 
 # vim
 vim/swp
+vim/backups
+vim/undodir
 .netrwhist
+
+# vundle
+bundle/**
+~bundle/vundle

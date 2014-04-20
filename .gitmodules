@@ -1,24 +1,3 @@
-[submodule "vim/bundle/tlib_vim"]
-	path = vim/bundle/tlib_vim
-	url = https://github.com/tomtom/tlib_vim.git
-[submodule "vim/bundle/vim-addon-mw-utils"]
-	path = vim/bundle/vim-addon-mw-utils
-	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "vim/bundle/vim-snipmate"]
-	path = vim/bundle/vim-snipmate
-	url = https://github.com/garbas/vim-snipmate.git
-[submodule "vim/bundle/vim-snippets"]
-	path = vim/bundle/vim-snippets
-	url = https://github.com/honza/vim-snippets.git
-[submodule "vim/bundle/ctrlp.vim"]
-	path = vim/bundle/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim.git
-[submodule "vim/bundle/vim-commentary"]
-	path = vim/bundle/vim-commentary
-	url = git://github.com/tpope/vim-commentary.git
 [submodule "zsh/prezto"]
 	path = zsh/prezto
 	url = https://github.com/DFurnes/prezto
-[submodule "vim/bundle/vim-coffee-script"]
-	path = vim/bundle/vim-coffee-script
-	url = https://github.com/kchmck/vim-coffee-script.git
