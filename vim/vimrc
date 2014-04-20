@@ -24,6 +24,7 @@ Bundle 'honza/vim-snippets'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
+Bundle 'Raimondi/delimitMate'
 
 
 " Leader
@@ -134,6 +135,8 @@ set scrolloff=5 " keep 5 lines above/below the cursor when scrolling
 " use tabs in makefiles 
 au FileType make setlocal noexpandtab
 
+" let delimitmate expand carriage returns with correct indentation
+let delimitMate_expand_cr=1
 
 " Line numbers
 " ------------ 
