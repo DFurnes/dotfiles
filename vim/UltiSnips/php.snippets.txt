@@ -1,0 +1,93 @@
+extends html,blade
+
+snippet cls "closure" [i]
+function($1)
+{
+	$2
+}$3
+endsnippet
+
+snippet ar "array" [i]
+array($1)$2
+endsnippet
+
+snippet r::g "laravel get route" [i]
+Route::get('$1', $2);$3
+endsnippet
+
+snippet r::p "laravel post route" [i]
+Route::post('$1', $2);$3
+endsnippet
+
+snippet v::m "laravel make view" [i]
+return View::make('$1');$2
+endsnippet
+
+snippet va::m "laravel make validator"
+Validator::make(${1:\$input}, ${2:\$rules});
+endsnippet
+
+snippet va "laravel validator"
+\$validator = Validator::make(${1:\$input}, ${2:\$rules});
+endsnippet
+
+snippet i::g "laravel input get" [i]
+Input::get('$1')$2
+endsnippet
+
+snippet i::o "Laravel old input" [i]
+Input::old('$1')$2
+endsnippet
+
+snippet f::t "Laravel form token" [i]
+Form::token()$1
+endsnippet
+
+snippet f::o "Laravel form open" [i]
+Form::open($1)$2
+endsnippet
+
+snippet f::c "Laravel form close" [i]
+Form::close($1)$2
+endsnippet
+
+snippet u::r "Laravel output route url" [i]
+URL::route('$1')$2
+endsnippet
+
+snippet u::a "Laravel output asset url" [i]
+URL::asset('$1')$2
+endsnippet
+
+snippet r::r "Laravel Redirect::route()" [i]
+Redirect::route('$1')$2
+endsnippet
+
+snippet ef "Laravel first error" [i]
+\$errors->first('$1')$2
+endsnippet
+
+snippet a::a "Laravel App::abort" [i]
+App::abort(${1:404}, '$2')$3
+endsnippet
+
+snippet vacon "Laravel validation connection" [i]
+$validator->getPresenceVerifier()->setConnection('$2');
+endsnippet
+
+snippet fres "Find laravel resource" [i]
+\$${1:resource} = ${2:Model}::find($3);
+if( !\$$1 ) \{
+	App::abort('404', '$4');
+\}$5
+endsnippet
+
+snippet r::gc "Route get closure" [i]
+Route::get('/$1', function() \{
+	$2
+\});$3
+endsnippet
+
+snippet r::t "Redirect::to" [i]
+return Redirect::to('$1');$2
+endsnippet

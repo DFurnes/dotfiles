@@ -1,0 +1,59 @@
+extends php,html
+
+snippet {{ "Blade php output" [i]
+\{\{ $0 \}\}
+endsnippet
+
+
+snippet @if "Blade conditional" [i]
+@if( $1 )
+	$2
+@endif
+endsnippet
+
+
+snippet @else "Blade else conditional" [i]
+@else
+	$1
+endsnippet
+
+
+snippet @elseif "Blade elseif conditional" [i]
+@elseif( $1 )
+	$2
+endsnippet
+
+
+snippet @foreach "Blade foreach loop" [i]
+@foreach( $1 as $2 )
+	$3
+@endforeach
+endsnippet
+
+
+snippet @for "Blade for loop" [i]
+@for($1; $2; $3)
+	$4
+@endfor
+endsnippet
+
+
+snippet @sec "Blade template section"
+@section('$1')
+	$2
+@stop
+endsnippet
+
+
+snippet @yield "Blade template yield"
+@yield('$1')
+endsnippet
+
+
+snippet @inc "Blade template include"
+@include('$1')
+endsnippet
+
+snippet ife"Blade if error exists" [i]
+@if(\$errors->first('$1')) ${2:has-error} @endif$3
+endsnippet
