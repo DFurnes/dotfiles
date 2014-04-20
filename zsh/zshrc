@@ -41,10 +41,6 @@ alias tl="tree -I node_modules"
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-alias vimrc="mvim ~/.vimrc"
-alias zshrc="mvim ~/.zshrc"
-alias zshenv="mvim ~/.zshenv"
-
 alias http="http-server"
 
 
@@ -60,6 +56,7 @@ function port() { sudo lsof -i :$*; } # check what's running on this port
 function trash() { mv $1 ~/.Trash } # move file to the trash
 
 # open multiple vim files in tabs
+alias vi="vim -p"
 alias vim="vim -p"
 alias mvim="mvim -p"
 

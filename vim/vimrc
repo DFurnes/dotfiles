@@ -54,8 +54,8 @@ set autoread
 " close vim if nerdtree is only window open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q
 
-" <ctrl>-n to open nerdtree
-map <C-n> :NERDTreeToggle<CR>
+" <ctrl>-b to open nerdtree
+map <C-b> :NERDTreeToggle<CR>
 
 " ignores for ctrl-p
 set wildignore+=*/tmp/*,*/vendor/*,*/dist/*,*/node_modules/*,*/html/*,*/.sass_cache/*,*.so,*.swp,*.zip     " Linux/MacOSX
