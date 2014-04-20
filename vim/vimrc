@@ -17,6 +17,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'chriskempson/base16-vim'
+Bundle 'editorconfig/editorconfig-vim'
 
 
 " Leader
