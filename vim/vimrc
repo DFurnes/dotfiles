@@ -18,6 +18,9 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'chriskempson/base16-vim'
 Bundle 'editorconfig/editorconfig-vim'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
 
@@ -109,6 +112,10 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 " TernJS things
 nmap <leader>d :TernDef
 nmap <leader>f :TernDoc
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<C-x>"
+let g:UltiSnipsJumpForwardTrigger="<C-x>"
 
 
 " Indentation / Tab settings
