@@ -25,6 +25,7 @@ Bundle 'marijnh/tern_for_vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'Raimondi/delimitMate'
+Bundle 'xsbeats/vim-blade'
 
 
 " Leader
