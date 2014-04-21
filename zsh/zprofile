@@ -74,3 +74,5 @@ if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
 
+# Allow Ctrl-S to be used as binding
+stty -ixon
