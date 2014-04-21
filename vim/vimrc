@@ -117,8 +117,9 @@ nmap <leader>d :TernDef
 nmap <leader>f :TernDoc
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger="<C-x>"
-let g:UltiSnipsJumpForwardTrigger="<C-x>"
+let g:UltiSnipsExpandTrigger="<C-S>"
+let g:UltiSnipsJumpForwardTrigger="<C-S>"
+let g:UltiSnipsJumpBackwardTrigger="<C-D>"
 
 
 " Indentation / Tab settings
