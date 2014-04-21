@@ -8,15 +8,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# set up rbenv
-eval "$(rbenv init - zsh)"
-
-# set up nodenv
-eval "$(nodenv init -)"
-
-# set up php-version
-source $(brew --prefix php-version)/php-version.sh && php-version 5
-
 # VIM MODE
 set -o vi
 
