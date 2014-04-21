@@ -59,9 +59,6 @@ au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= l
 " automatically read a file that has changed on disk
 set autoread
 
-" close vim if nerdtree is only window open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q
-
 " <ctrl>-b to open nerdtree
 map <C-b> :NERDTreeToggle<CR>
 
