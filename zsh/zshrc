@@ -25,7 +25,7 @@ set completion-ignore-case On
 alias bower='noglob bower'
 
 # Load aliases
-source "$HOME/.dotfiles/zsh/zsh_aliases"
+source "$HOME/.dotfiles/zsh/aliases.zsh"
 
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

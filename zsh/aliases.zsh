@@ -1,6 +1,3 @@
-# Expand aliases on tab
-shopt -s expand_aliases
-
 # Basic
 # -----
 alias c="clear"
@@ -34,9 +31,10 @@ function trash() { mv $1 ~/.Trash } # move file to the trash
 
 # Vim
 # ---
+# using bundled vim from MacVim
 # open multiple vim files in tabs
-alias vi="vim -p"
-alias vim="vim -p"
+alias vi="mvim -v -p"
+alias vim="mvim -v -p"
 alias mvim="mvim -p"
 
 
@@ -76,8 +74,8 @@ alias vre="vagrant halt && vagrant reload"
 
 # DoSomething.org
 # ---------------
-ds() { vagrant ssh -c "cd /vagrant && ds $*" }
-drush() { v ssh -c "cd /vagrant/html && drush $*" }
+ds() { vagrant ssh -c "cd /var/www/vagrant && ds $*" }
+drush() { v ssh -c "cd /var/www/vagrant/html && drush $*" }
 nsync() {
   cd $HOME/Sites/neue
   grunt prod
@@ -88,5 +86,16 @@ nsync() {
 
   cd -
 
-  echo "Built dist package and copied into DS app."
+  echo "\e[42m\e[30m ✓ Built dist package and copied into DS app."
 }
+nlink() {
+  rm -rf $HOME/Sites/dosomething/lib/themes/dosomething/paraneue_dosomething/bower_components/neue
+  ln -s $HOME/Sites/neue/dist $HOME/Sites/dosomething/lib/themes/dosomething/paraneue_dosomething/bower_components/neue
+
+  echo "\e[44m\e[30m ✓ Symlinked dist output directory to DS app."
+}
+
+
+# Fun
+# ---
+alias nyan='telnet nyancat.dakko.us'
