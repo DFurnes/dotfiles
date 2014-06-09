@@ -1,9 +1,9 @@
 # Brewfile
 
 # Tap additional sources 
-tap phinze/cask
-tap josegonzalez/homebrew-php
 tap homebrew/versions
+tap homebrew/homebrew-php
+tap phinze/cask
 
 # Install Cask
 install brew-cask
