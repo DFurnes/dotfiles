@@ -40,7 +40,6 @@ cdpath=(
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/.rbenv/shims 
-  $HOME/.nodenv/bin
   /usr/local/{bin,sbin}
   /{bin,sbin}
   /usr/{bin,sbin}
