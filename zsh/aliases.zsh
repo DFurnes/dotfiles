@@ -96,6 +96,7 @@ nlink() {
   echo "\e[44m\e[30m ✓ Symlinked dist output directory to DS app."
 }
 
+alias dcc="drush cc all"
 
 # Fun
 # ---
