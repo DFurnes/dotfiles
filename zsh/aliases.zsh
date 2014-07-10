@@ -15,6 +15,7 @@ alias tl="tree -I node_modules"
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
+loc() { find $1 -name $2 | xargs wc -l }
 
 # Shortcuts
 # ---------
