@@ -1,3 +1,7 @@
 [submodule "zsh/prezto"]
 	path = zsh/prezto
 	url = https://github.com/DFurnes/prezto
+
+[submodule "vim/bundle/vundle"]
+	path = vim/bundle/vundle
+	url = https://github.com/gmarik/Vundle.vim.git
