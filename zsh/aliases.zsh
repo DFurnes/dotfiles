@@ -75,8 +75,8 @@ alias vre="vagrant halt && vagrant reload"
 
 # DoSomething.org
 # ---------------
-ds() { vagrant ssh -c "cd /var/www/vagrant && ds $*" }
-drush() { v ssh -c "cd /var/www/vagrant/html && drush $*" }
+ds() { vagrant ssh -c "cd /var/www/dev.dosomething.org&& ds $*" }
+drush() { v ssh -c "cd /var/www/dev.dosomething.org/html && drush $*" }
 nsync() {
   cd $HOME/Sites/neue
   grunt prod
