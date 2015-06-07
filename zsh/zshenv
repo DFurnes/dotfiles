@@ -2,13 +2,9 @@
 # Defines environment variables.
 #
 
+export DS_VAGRANT_MOUNT_NFS=1
+
 # Zprezto: Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-
-# set up rbenv
-eval "$(rbenv init -)"
-
-# set up php-version
-source $(brew --prefix php-version)/php-version.sh && php-version 5
