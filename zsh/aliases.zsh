@@ -62,6 +62,7 @@ gpr() {
 gpu() { git push --set-upstream origin $(git-branch-current) } 
 gpuf() { git push --set-upstream origin $(git-branch-current) --force } 
 gsync() { git fetch upstream && git checkout dev && git rebase upstream/dev && git push origin dev } 
+gsyncm() { git fetch upstream && git checkout master && git rebase upstream/master && git push origin master } 
 
 
 # Vagrant
