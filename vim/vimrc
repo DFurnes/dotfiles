@@ -11,13 +11,11 @@ Bundle 'gmarik/vundle'
 Bundle 'rking/ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-surround'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'chriskempson/base16-vim'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'SirVer/ultisnips'
@@ -30,8 +28,180 @@ Bundle 'xsbeats/vim-blade'
 Bundle 'henrik/vim-reveal-in-finder'
 
 
-" Load config files
+" Aliases
 " -----------------
-for f in split(glob('~/.vim/settings/*.vim'), '\n')
-  exe 'source' f
-endfor
+" Set leader to ',' since its easier to type
+let mapleader = ","
+
+" shortcut to get out of insert mode.
+imap jj <Esc>
+
+" shortcuts for creating splits
+nnoremap <silent> vv <C-w>v
+nnoremap <silent> ss <C-w>s
+
+" shortcuts to switch between splits
+nnoremap sh <C-w>h
+nnoremap sl <C-w>l
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+
+" shortcut to hide search highlights
+nmap <leader>h :nohlsearch<cr>
+
+" JavaScript intelligence via TernJS
+nmap <leader>d :TernDef
+nmap <leader>f :TernDoc
+
+" Open NerdTree
+map <C-b> :NERDTreeToggle<CR>
+
+" Quick file-switching via Ctrl-P
+map <C-p> :CtrlP<cr>
+map <C-t> :CtrlPBufTag<cr>
+
+
+" Appearance & color scheme
+" -------------------------
+colorscheme darcula
+
+" fix background display issue in tmux
+set t_ut=
+
+" use mouse in terminal vim
+set mouse=a
+
+" line numbers
+set ruler " show line numbers
+set relativenumber " relative line numbers
+set number " shows current line as absolute line number (Vim 7.4+)
+set cul " highlights current line
+
+" open splits below/right of current area, like a sane person
+set splitbelow
+set splitright
+
+" keep 5 lines above/below the cursor when scrolling
+set scrolloff=5
+
+" don't be annoying
+set noerrorbells
+set novisualbell
+
+" show powerline all the time
+set laststatus=2
+
+" gui options
+set guifont=Menlo:h12
+
+if has("gui_running")
+  set guioptions-=T
+  set guioptions-=L
+  set guioptions-=R
+endif
+
+
+" Code Completion
+" ---------------
+set omnifunc=syntaxcomplete#Complete
+
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<C-S>"
+let g:UltiSnipsJumpForwardTrigger="<C-S>"
+let g:UltiSnipsJumpBackwardTrigger="<C-D>"
+
+
+" Ctrl-P
+" ------
+
+" Use The Silver Searcher if installed
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" ignores for ctrl-p
+set wildignore+=*/tmp/*,*/vendor/*,*/dist/*,*/node_modules/*,*/html/*,*/.sass_cache/*,*.so,*.swp,*.zip     " Linux/MacOSX
+
+
+" Delimitmate
+" -----------
+
+" let delimitmate expand carriage returns with correct indentation
+let delimitMate_expand_cr=1
+
+
+" Opening/closing files
+" ---------------------
+
+" Remember last location in file (except git commit prompt)
+au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
+   \| exe "normal! g`\"" | endif
+
+" automatically read a file that has changed on disk
+set autoread
+
+
+" Filetypes & syntax highlighting
+" ----------------------------------
+syntax on
+filetype off
+filetype indent on
+filetype plugin on
+set encoding=utf-8
+
+" json syntax highlighting
+au BufNewFile,BufRead *.json set ft=javascript
+
+" jbuilder syntax highlighting
+au BufNewFile,BufRead Brewfile set ft=sh
+
+" syntax highlighting for Lo-dash template files (.tpl.html)
+au BufRead,BufNewFile *.tpl.html set filetype=eruby.html
+
+" syntax highlighting for *.md files
+au BufRead,BufNewFile *.md set filetype=markdown
+
+set showmatch " show matching brackets
+
+" configure javascript libraries used for syntax highlighting
+let g:used_javascript_libs = 'jquery,underscore,requirejs'
+
+
+" set default indentation settings
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set backspace=2
+set autoindent
+set smartindent
+set nocindent
+
+" use tabs in makefiles
+au FileType make setlocal noexpandtab
+
+
+" Search
+" ------
+set incsearch " highlight matches as we search
+set hlsearch " keep search highlights after search
+set ignorecase " ignore case when searching
+set smartcase " ...but make it case-sensitive if not all lowercase
+
+
+" Swap, backup, and undo
+" ----------------------
+set backupdir^=~/.vim/backups//
+set undodir=~/.vim/undodir
+
+" disable swap file
+set noswapfile
+
+set undofile " enables peristent undo (keeps history on file reload)
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
