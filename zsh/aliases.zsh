@@ -15,7 +15,9 @@ alias tl="tree -I node_modules"
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
+# Get lines of code in a file
 loc() { find $1 -name $2 | xargs wc -l }
+
 
 # Shortcuts
 # ---------
@@ -34,8 +36,8 @@ function trash() { mv $1 ~/.Trash } # move file to the trash
 # ---
 # using bundled vim from MacVim
 # open multiple vim files in tabs
-alias vi="mvim -v -p"
-alias vim="mvim -v -p"
+alias vi="vim -p"
+alias vim="vim -p"
 alias mvim="mvim -p"
 
 

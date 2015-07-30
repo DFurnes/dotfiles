@@ -1,6 +1,5 @@
 set nocp  " we don't wanna be vi compatible.
 
-
 " Vundle 
 " -----------------
 " set the runtime path to include Vundle and initialize
@@ -64,6 +63,7 @@ map <C-t> :CtrlPBufTag<cr>
 " Appearance & color scheme
 " -------------------------
 colorscheme darcula
+set background=dark
 
 " fix background display issue in tmux
 set t_ut=
