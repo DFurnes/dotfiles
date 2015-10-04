@@ -18,11 +18,11 @@ alias ....="cd ../../.."
 # Get lines of code in a file
 loc() { find $1 -name $2 | xargs wc -l }
 
-
 # Shortcuts
 # ---------
 alias http="http-server"
-alias be="bundle exec"
+alias s="npm start"
+alias t="npm test"
 
 
 # OS X
