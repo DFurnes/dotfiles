@@ -25,6 +25,10 @@ Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'xsbeats/vim-blade'
 Bundle 'henrik/vim-reveal-in-finder'
+Bundle 'junegunn/goyo.vim'
+Bundle 'reedes/vim-pencil'
+
+
 
 
 " Aliases
@@ -166,6 +170,15 @@ au BufRead,BufNewFile *.tpl.html set filetype=eruby.html
 
 " syntax highlighting for *.md files
 au BufRead,BufNewFile *.md set filetype=markdown
+
+" configure plugins for writing with markdown
+let g:pencil#wrapModeDefault = 'soft'
+
+augroup pencil
+  autocmd!
+  autocmd FileType markdown     call pencil#init()
+  autocmd FileType text         call pencil#init({'wrap': 'hard'})
+augroup END
 
 set showmatch " show matching brackets
 
