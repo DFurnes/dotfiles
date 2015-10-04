@@ -56,6 +56,7 @@ alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset 
 alias glgg="git log"
 alias gp="git push"
 alias gpl="git pull"
+alias gcl="git clone"
 alias gclean="git fetch --prune --all && git branch --merged dev | grep -v 'dev' | xargs git branch -d && git branch"
 alias ghub="hub browse"
 gpr() {
