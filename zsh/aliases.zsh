@@ -2,14 +2,13 @@
 # -----
 alias c="clear"
 
-
 # File operations
 # ---------------
 alias l="ls -GFh"
 alias ls="ls -GFh"
 alias ll="ls -GFhl"
 
-alias t="tree -L 2 -I node_modules"
+alias ts="tree -L 2 -I node_modules"
 alias tl="tree -I node_modules"
 
 alias ...="cd ../.."
