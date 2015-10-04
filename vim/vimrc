@@ -57,7 +57,8 @@ nmap <leader>d :TernDef
 nmap <leader>f :TernDoc
 
 " Open NerdTree
-map <C-b> :NERDTreeToggle<CR>
+map <D-1> :NERDTreeToggle %<CR>
+map <D-2> :NERDTreeFind<CR>
 
 " Quick file-switching via Ctrl-P
 map <C-p> :CtrlP<cr>
