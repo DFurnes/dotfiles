@@ -50,3 +50,7 @@ source "$HOME/.dotfiles/zsh/aliases.zsh"
 
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+# Use Homebrew's PHP
+export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+
