@@ -20,7 +20,7 @@ loc() { find $1 -name $2 | xargs wc -l }
 
 # Shortcuts
 # ---------
-alias http="http-server"
+alias serve="http-server"
 alias s="npm start"
 alias t="npm test"
 
