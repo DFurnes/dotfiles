@@ -4,13 +4,22 @@ alias c="clear"
 
 # File operations
 # ---------------
+
+# List files (with colors & file-type indicators (dir, symlink..))
 alias l="ls -GFh"
 alias ls="ls -GFh"
+
+# Detailed file listing (with above options & human-readable file sizes)
 alias ll="ls -GFhl"
 
+# List directories, sorted by disk usage
+alias lfs="du -sckx * | sort -nr"
+
+# List files/directories in tree view
 alias ts="tree -L 2 -I node_modules"
 alias tl="tree -I node_modules"
 
+# Directory traversal shortcuts
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
@@ -26,7 +35,6 @@ alias t="npm test"
 
 # OS X
 # ----
-alias ql='qlmanage -p "$@" & > /dev/null'
 alias oo="open ." # open current directory in OS X Finder
 function port() { sudo lsof -i :$*; } # check what's running on this port
 function trash() { mv $1 ~/.Trash } # move file to the trash
@@ -104,3 +112,4 @@ alias dcc="drush cc all"
 # Fun
 # ---
 alias nyan='telnet nyancat.dakko.us'
+alias gifify='gifiy -n'

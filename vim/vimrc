@@ -98,13 +98,9 @@ set laststatus=2
 
 " gui options
 set guifont=Menlo:h12
-
-if has("gui_running")
-  set guioptions-=T
-  set guioptions-=L
-  set guioptions-=R
-endif
-
+set guioptions-=m
+set guioptions-=t
+set guioptions-=r
 
 " Code Completion
 " ---------------

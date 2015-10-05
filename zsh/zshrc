@@ -2,35 +2,36 @@
 # Executes commands at the start of an interactive session.
 #
 
-
-# Source Prezto.
+# Source Prezto:
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# VIM MODE
-# --------
+# Load aliases:
+alias aliases='vi $HOME/.dotfiles/zsh/aliases.zsh'
+source "$HOME/.dotfiles/zsh/aliases.zsh"
+
+# Configure completion:
+# case-insensitive (all), partial-word and then substring completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
+    'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+set completion-ignore-case On
+
+# Configure Vim mode:
 set -o vi
 
 # reduce delay on <ESC> to 0.1s
 export KEYTIMEOUT=1
 
-# backspace and ^h working even after
-# returning from command mode
+# keep backspace and ^h working even
+# after returning from command mode
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 
-# ctrl-w removed word backwards
+# ctrl-w to remove word backwards
 bindkey '^w' backward-kill-word
 
-
-# completion
-# case-insensitive (all),partial-word and then substring completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
-    'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-set completion-ignore-case On
-
-# Fancy Ctrl-Z
+# Fancy Ctrl-Z:
 # from: http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -43,14 +44,3 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
-
-# Load aliases
-alias aliases='vi $HOME/.dotfiles/zsh/aliases.zsh'
-source "$HOME/.dotfiles/zsh/aliases.zsh"
-
-# Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-# Use Homebrew's PHP
-export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
-
