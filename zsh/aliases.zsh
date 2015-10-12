@@ -1,5 +1,9 @@
 # Basic
 # -----
+
+# Clear screen and scroll-back
+# <http://apple.stackexchange.com/a/113168>
+alias clear="clear && printf '\e[3J'"
 alias c="clear"
 
 # File operations
