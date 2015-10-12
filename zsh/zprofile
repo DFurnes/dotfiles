@@ -11,24 +11,15 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
-
 # Editors
-export VISUAL=vim
-export EDITOR=vim
-export GIT_EDITOR=vim
+export VISUAL='vim'
+export EDITOR='vim'
+export GIT_EDITOR='vim'
 export PAGER='less'
-
-
-# Language
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-fi
-
 
 # Paths
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
-
 
 # Set the the list of directories that cd searches.
 cdpath=(
@@ -36,7 +27,6 @@ cdpath=(
   $HOME/Source
   $cdpath
 )
-
 
 # Set the list of directories that Zsh searches for programs.
 path=(
@@ -54,25 +44,12 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="/usr/local/opt/php56/bin:$PATH"
 
 # Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -X -z-4'
+export LESS='-i -R -w -X -F'
 
-# Set the Less input preprocessor.
-if (( $+commands[lesspipe.sh] )); then
-  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
-fi
-
-# Temporary Files
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$USER"
-  mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
-if [[ ! -d "$TMPPREFIX" ]]; then
-  mkdir -p "$TMPPREFIX"
-fi
+# Enable syntax highlighting when viewing files with Less.
+# <http://ole.michelsen.dk/blog/syntax-highlight-files-macos-terminal-less.html>
+LESSPIPE=`which src-hilite-lesspipe.sh`
+export LESSOPEN="| ${LESSPIPE} %s"
 
 # Allow Ctrl-S to be used as binding
 stty -ixon

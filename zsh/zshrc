@@ -2,45 +2,54 @@
 # Executes commands at the start of an interactive session.
 #
 
-# Source Prezto:
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+# Zsh Options:
+# Quickly change directories (e.g. $ foo --> $ cd foo)
+setopt auto_cd 
+
+# History:
+export HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt SHARE_HISTORY
+
+# All sessions append to one command history
+setopt APPEND_HISTORY
+
+# Add commands to history as they are typed (don't wait until exit)
+setopt inc_append_history
+
+# Don't write duplicates to history & remove extra blanks
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
 
 # Load aliases:
 alias aliases='vi $HOME/.dotfiles/zsh/aliases.zsh'
 source "$HOME/.dotfiles/zsh/aliases.zsh"
 
-# Configure completion:
+# Load bindings:
+alias bindings='vi $HOME/.dotfiles/zsh/bindings.zsh'
+source "$HOME/.dotfiles/zsh/bindings.zsh"
+
+# Pure prompt:
+# <https://github.com/sindresorhus/pure>
+autoload -U promptinit && promptinit
+prompt pure
+
+# Show current vi mode in prompt:
+PROMPT='%(?.%F{magenta}.%F{red})${${KEYMAP/vicmd/❮%f}/(main|viins)/❯%f} '
+function zle-line-init zle-keymap-select {
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+# Completion:
 # case-insensitive (all), partial-word and then substring completion
+autoload -U compinit
+compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 set completion-ignore-case On
 
-# Configure Vim mode:
-set -o vi
-
-# reduce delay on <ESC> to 0.1s
-export KEYTIMEOUT=1
-
-# keep backspace and ^h working even
-# after returning from command mode
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-
-# ctrl-w to remove word backwards
-bindkey '^w' backward-kill-word
-
-# Fancy Ctrl-Z:
-# from: http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
-fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER="fg"
-    zle accept-line
-  else
-    zle push-input
-    zle clear-screen
-  fi
-}
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
