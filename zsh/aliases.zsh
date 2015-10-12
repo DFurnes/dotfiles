@@ -28,10 +28,14 @@ loc() { find $1 -name $2 | xargs wc -l }
 
 # Shortcuts
 # ---------
+
+# Serve directory as a static site.
+# Requires 'npm install -g http-server'
 alias serve="http-server"
+
+# NPM script shortcuts
 alias s="npm start"
 alias t="npm test"
-
 
 # OS X
 # ----
@@ -66,13 +70,13 @@ alias gpl="git pull"
 alias gcl="git clone"
 alias gclean="git fetch --prune --all && git branch --merged dev | grep -v 'dev' | xargs git branch -d && git branch"
 alias ghub="hub browse"
-gpr() {
+function gpr() {
   hub browse -- compare/$(git-branch-current)
 }
-gpu() { git push --set-upstream origin $(git-branch-current) } 
-gpuf() { git push --set-upstream origin $(git-branch-current) --force } 
-gsync() { git fetch upstream && git checkout dev && git rebase upstream/dev && git push origin dev } 
-gsyncm() { git fetch upstream && git checkout master && git rebase upstream/master && git push origin master } 
+function gpu() { git push --set-upstream origin $(git-branch-current) } 
+function gpuf() { git push --set-upstream origin $(git-branch-current) --force } 
+function gsync() { git fetch upstream && git checkout dev && git rebase upstream/dev && git push origin dev } 
+function gsyncm() { git fetch upstream && git checkout master && git rebase upstream/master && git push origin master } 
 
 
 # Vagrant
@@ -88,28 +92,8 @@ alias vre="vagrant halt && vagrant reload"
 # ---------------
 ds() { vagrant ssh -c "cd /var/www/dev.dosomething.org&& ds $*" }
 drush() { v ssh -c "cd /var/www/dev.dosomething.org/html && drush $*" }
-nsync() {
-  cd $HOME/Sites/neue
-  grunt prod
-
-  rm -rf $HOME/Sites/dosomething/lib/themes/dosomething/paraneue_dosomething/bower_components/neue
-  mkdir $HOME/Sites/dosomething/lib/themes/dosomething/paraneue_dosomething/bower_components/neue
-  cp -r dist/* $HOME/Sites/dosomething/lib/themes/dosomething/paraneue_dosomething/bower_components/neue
-
-  cd -
-
-  echo "\e[42m\e[30m ✓ Built dist package and copied into DS app."
-}
-nlink() {
-  rm -rf $HOME/Sites/dosomething/lib/themes/dosomething/paraneue_dosomething/bower_components/neue
-  ln -s $HOME/Sites/neue/dist $HOME/Sites/dosomething/lib/themes/dosomething/paraneue_dosomething/bower_components/neue
-
-  echo "\e[44m\e[30m ✓ Symlinked dist output directory to DS app."
-}
-
 alias dcc="drush cc all"
 
 # Fun
 # ---
 alias nyan='telnet nyancat.dakko.us'
-alias gifify='gifiy -n'
