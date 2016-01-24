@@ -30,6 +30,14 @@ alias ....="cd ../../.."
 # Get lines of code in a file
 loc() { find $1 -name $2 | xargs wc -l }
 
+# get gzipped size
+function gz() {
+  echo "orig size    (bytes): "
+  cat "$1" | wc -c
+  echo "gzipped size (bytes): "
+  gzip -c "$1" | wc -c
+}
+
 # Shortcuts
 # ---------
 
@@ -51,13 +59,19 @@ function trash() { mv $1 ~/.Trash } # move file to the trash
 # ---
 # using bundled vim from MacVim
 # open multiple vim files in tabs
-alias vi="vim -p"
-alias vim="vim -p"
+alias vi="mvim -v -p"
+alias vim="mvim -v -p"
 alias mvim="mvim -p"
 
 
 # Git & GitHub
 # ------------
+
+git-branch-current() {
+  git rev-parse --abbrev-ref HEAD
+}
+
+alias git="hub"
 alias g="git"
 alias gs="git status"
 alias gst="git status -sb"
@@ -75,7 +89,7 @@ alias gcl="git clone"
 alias gclean="git fetch --prune --all && git branch --merged dev | grep -v 'dev' | xargs git branch -d && git branch"
 alias ghub="hub browse"
 function gpr() {
-  hub browse -- compare/$(git-branch-current)
+  hub compare $(git-branch-current)
 }
 function gpu() { git push --set-upstream origin $(git-branch-current) } 
 function gpuf() { git push --set-upstream origin $(git-branch-current) --force } 

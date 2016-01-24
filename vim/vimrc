@@ -6,6 +6,7 @@ set nocp  " we don't wanna be vi compatible.
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+Bundle 'NLKNguyen/papercolor-theme'
 Bundle 'gmarik/vundle'
 Bundle 'rking/ag.vim'
 Bundle 'kien/ctrlp.vim'
@@ -16,10 +17,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'editorconfig/editorconfig-vim'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'marijnh/tern_for_vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'Raimondi/delimitMate'
@@ -27,8 +24,8 @@ Bundle 'xsbeats/vim-blade'
 Bundle 'henrik/vim-reveal-in-finder'
 Bundle 'junegunn/goyo.vim'
 Bundle 'reedes/vim-pencil'
-
-
+Bundle 'docunext/closetag.vim'
+Plugin 'mattn/emmet-vim'
 
 
 " Aliases
@@ -38,6 +35,9 @@ let mapleader = ","
 
 " shortcut to get out of insert mode.
 imap jj <Esc>
+
+" shortcut to toggle paste mode
+set pastetoggle=<leader>p
 
 " shortcuts for creating splits
 nnoremap <silent> vv <C-w>v
@@ -52,10 +52,6 @@ nnoremap sk <C-w>k
 " shortcut to hide search highlights
 nmap <leader>h :nohlsearch<cr>
 
-" JavaScript intelligence via TernJS
-nmap <leader>d :TernDef
-nmap <leader>f :TernDoc
-
 " Open NerdTree
 map <D-1> :NERDTreeToggle %<CR>
 map <D-2> :NERDTreeFind<CR>
@@ -67,8 +63,9 @@ map <C-t> :CtrlPBufTag<cr>
 
 " Appearance & color scheme
 " -------------------------
-colorscheme darcula
+syntax enable
 set background=dark
+colorscheme PaperColor
 
 " fix background display issue in tmux
 set t_ut=
@@ -101,6 +98,9 @@ set guifont=Menlo:h12
 set guioptions-=m
 set guioptions-=t
 set guioptions-=r
+
+" hide splash screen
+set shortmess+=I
 
 " Code Completion
 " ---------------
@@ -181,7 +181,6 @@ set showmatch " show matching brackets
 
 " configure javascript libraries used for syntax highlighting
 let g:used_javascript_libs = 'jquery,underscore,requirejs'
-
 
 " set default indentation settings
 set expandtab

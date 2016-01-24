@@ -6,18 +6,6 @@
 # Quickly change directories (e.g. $ foo --> $ cd foo)
 setopt auto_cd 
 
-# History:
-export HISTFILE=~/.zsh_history
-export HISTSIZE=10000
-export SAVEHIST=10000
-setopt SHARE_HISTORY
-
-# All sessions append to one command history
-setopt APPEND_HISTORY
-
-# Add commands to history as they are typed (don't wait until exit)
-setopt inc_append_history
-
 # Don't write duplicates to history & remove extra blanks
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS

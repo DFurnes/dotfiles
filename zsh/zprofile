@@ -31,11 +31,15 @@ cdpath=(
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/.composer/vendor/bin
+  $HOME/.rbenv/bin
   /usr/local/{bin,sbin}
   /{bin,sbin}
   /usr/{bin,sbin}
   $path
 )
+
+# rbenv
+eval "$(rbenv init -)"
 
 # Add Heroku toolkit to PATH
 export PATH="/usr/local/heroku/bin:$PATH"
