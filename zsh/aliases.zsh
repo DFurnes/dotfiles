@@ -1,6 +1,14 @@
 # Basic
 # -----
 
+# Homestead
+function hs() {
+  DIRECTORY=$(pwd)
+  HOME_RELATIVE_DIRECTORY=${DIRECTORY/$HOME/\~}
+  DEFAULT="ssh --command \"cd $HOME_RELATIVE_DIRECTORY; bash\""
+  (cd ~/.homestead; eval "vagrant ${*:-$DEFAULT}")
+}
+
 # Clear screen and scroll-back
 # <http://apple.stackexchange.com/a/113168>
 alias clear="clear && printf '\e[3J'"
