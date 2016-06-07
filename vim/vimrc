@@ -14,7 +14,9 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-surround'
-Bundle 'Lokaltog/vim-powerline'
+" Bundle 'Lokaltog/vim-powerline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'jelera/vim-javascript-syntax'
@@ -26,6 +28,24 @@ Bundle 'junegunn/goyo.vim'
 Bundle 'reedes/vim-pencil'
 Bundle 'docunext/closetag.vim'
 Plugin 'mattn/emmet-vim'
+
+let g:airline_theme = "powerlineish"
+let g:airline_powerline_fonts = 0
+let g:airline_symbols = {}
+
+" unicode symbols
+let g:airline_left_sep = ''
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_sep = ''
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
 
 
 " Aliases
