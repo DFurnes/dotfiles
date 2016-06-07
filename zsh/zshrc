@@ -11,7 +11,10 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 
 # Load aliases:
-alias aliases='vi $HOME/.dotfiles/zsh/aliases.zsh'
+function aliases() {
+  vi $HOME/.dotfiles/zsh/aliases.zsh
+  source ~/.zshrc
+}
 source "$HOME/.dotfiles/zsh/aliases.zsh"
 
 # Load bindings:
