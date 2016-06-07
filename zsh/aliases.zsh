@@ -14,6 +14,8 @@ function hs() {
 alias clear="clear && printf '\e[3J'"
 alias c="clear"
 
+alias ws="pstorm"
+
 # File operations
 # ---------------
 
