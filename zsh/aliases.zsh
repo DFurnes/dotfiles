@@ -16,6 +16,8 @@ alias c="clear"
 
 alias ws="pstorm"
 
+alias lock="pmset displaysleepnow"
+
 # File operations
 # ---------------
 
