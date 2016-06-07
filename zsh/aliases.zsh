@@ -126,3 +126,7 @@ alias dcc="drush cc all"
 # Fun
 # ---
 alias nyan='telnet nyancat.dakko.us'
+
+mp4togif() {
+  ffmpeg -i $1 -vf scale=$2:-1 -r 10 -f image2pipe -vcodec ppm - | convert -delay 5 -loop 0 - output.gif
+}
