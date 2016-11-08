@@ -86,7 +86,7 @@ git-branch-current() {
 alias git="hub"
 alias g="git"
 alias gs="git status"
-alias gst="git status -sb"
+alias gst="git stash"
 alias ga="git add"
 alias gc="git commit"
 alias gdiff="git diff"
