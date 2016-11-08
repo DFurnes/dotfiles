@@ -69,11 +69,7 @@ function trash() { mv $1 ~/.Trash } # move file to the trash
 
 # Vim
 # ---
-# using bundled vim from MacVim
-# open multiple vim files in tabs
-alias vi="mvim -v -p"
-alias vim="mvim -v -p"
-alias mvim="mvim -p"
+alias vi="vim"
 
 
 # Git & GitHub
