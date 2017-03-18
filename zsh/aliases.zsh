@@ -61,6 +61,8 @@ alias serve="http-server -o"
 alias s="npm start"
 alias t="npm test"
 
+function chownme() { sudo chown -R $(whoami) $*}
+
 # OS X
 # ----
 alias oo="open ." # open current directory in OS X Finder
