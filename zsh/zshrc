@@ -26,14 +26,6 @@ source "$HOME/.dotfiles/zsh/bindings.zsh"
 autoload -U promptinit && promptinit
 prompt pure
 
-# Show current vi mode in prompt:
-PROMPT='%(?.%F{magenta}.%F{red})${${KEYMAP/vicmd/❮%f}/(main|viins)/❯%f} '
-function zle-line-init zle-keymap-select {
-    zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
-
 # Completion:
 # case-insensitive (all), partial-word and then substring completion
 autoload -U compinit
