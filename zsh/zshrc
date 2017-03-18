@@ -24,7 +24,7 @@ source "$HOME/.dotfiles/zsh/bindings.zsh"
 # Pure prompt:
 # <https://github.com/sindresorhus/pure>
 autoload -U promptinit && promptinit
-prompt pure
+prompt purer
 
 # Completion:
 # case-insensitive (all), partial-word and then substring completion
