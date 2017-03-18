@@ -29,8 +29,9 @@ Plugin 'reedes/vim-pencil'
 Plugin 'docunext/closetag.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'ConradIrwin/vim-bracketed-paste'
-
+Plugin 'w0rp/ale'
 
 let g:airline_theme = "powerlineish"
 let g:airline_powerline_fonts = 0
@@ -95,6 +96,9 @@ set t_ut=
 
 " use mouse in terminal vim
 set mouse=a
+
+" use system clipboard for default copy-and-paste register
+set clipboard=unnamed
 
 " line numbers
 set ruler " show line numbers
@@ -187,6 +191,7 @@ au BufNewFile,BufRead Brewfile set ft=sh
 
 " syntax highlighting for Lo-dash template files (.tpl.html)
 au BufRead,BufNewFile *.tpl.html set filetype=eruby.html
+au BufRead,BufNewFile *.ejs set filetype=eruby.html
 
 " syntax highlighting for *.md files
 au BufRead,BufNewFile *.md set filetype=markdown
