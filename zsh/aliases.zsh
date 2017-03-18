@@ -53,9 +53,7 @@ function gz() {
 # Shortcuts
 # ---------
 
-# Serve directory as a static site.
-# Requires 'npm install -g http-server'
-alias serve="http-server -o"
+alias hey="noglob hey"
 
 # NPM script shortcuts
 alias s="npm start"
