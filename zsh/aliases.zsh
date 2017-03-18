@@ -11,7 +11,7 @@ function hs() {
 
 # Clear screen and scroll-back
 # <http://apple.stackexchange.com/a/113168>
-alias clear="clear && printf '\e[3J'"
+alias clear="clear && PURER_PROMPT_COMMAND_COUNT=0 && printf '\e[3J'"
 alias c="clear"
 
 alias ws="pstorm"
