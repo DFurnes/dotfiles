@@ -46,7 +46,7 @@ eval "$(rbenv init -)"
 export PATH="/usr/local/heroku/bin:$PATH"
 
 # Use Homebrew-installed PHP, rather than system default
-export PATH="/usr/local/opt/php56/bin:$PATH"
+export PATH="$(brew --prefix homebrew/php/php70)/bin:$PATH"
 
 # Set the default Less options.
 export LESS='-i -R -w -X -F'
