@@ -6,9 +6,14 @@
 # Quickly change directories (e.g. $ foo --> $ cd foo)
 setopt auto_cd 
 
+# enable history
+SAVEHIST=100
+HISTFILE=~/.zsh_history
+
 # Don't write duplicates to history & remove extra blanks
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
+setopt APPEND_HISTORY
 
 # Load aliases:
 function aliases() {
