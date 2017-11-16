@@ -198,6 +198,7 @@ au BufRead,BufNewFile *.md set filetype=markdown
 
 " configure plugins for writing with markdown
 let g:pencil#wrapModeDefault = 'soft'
+let g:pencil#conceallevel = 0
 
 augroup pencil
   autocmd!
