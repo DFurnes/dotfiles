@@ -82,6 +82,7 @@ function trash() { mv $1 ~/.Trash } # move file to the trash
 # Vim
 # ---
 alias vi="vim"
+alias mvim="/Applications/MacVim.app/Contents/MacOS/Vim -g"
 
 
 # Git & GitHub
