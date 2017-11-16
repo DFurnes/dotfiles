@@ -26,9 +26,11 @@ source "$HOME/.dotfiles/zsh/aliases.zsh"
 alias bindings='vi $HOME/.dotfiles/zsh/bindings.zsh'
 source "$HOME/.dotfiles/zsh/bindings.zsh"
 
-# Pure prompt:
-# <https://github.com/sindresorhus/pure>
+# Purer prompt:
+# <https://github.com/dfurnes/purer>
 autoload -U promptinit && promptinit
+export PURE_PROMPT_SYMBOL_COLOR="white"
+export PURE_PROMPT_SYMBOL="λ"
 prompt purer
 
 # Completion:
