@@ -1,6 +1,9 @@
 # Basic
 # -----
 
+# Jekyll
+alias j="bundle exec jekyll liveserve --incremental"
+
 # Homestead
 function homestead() {
   DIRECTORY=$(pwd)
