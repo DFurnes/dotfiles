@@ -6,33 +6,29 @@ set nocp  " we don't wanna be vi compatible.
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'vim-scripts/AfterColors.vim'
-Plugin 'gmarik/vundle'
-Plugin 'rking/ag.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-surround'
+Plugin 'ConradIrwin/vim-bracketed-paste' " iterm2 paste support
+Plugin 'HerringtonDarkholme/yats.vim' " TypeScript syntax 
+Plugin 'NLKNguyen/papercolor-theme' " pretty color scheme
+Plugin 'Raimondi/delimitMate' " add matching quote, parens, brackets
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'docunext/closetag.vim' " auto-</tag>
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'gmarik/vundle' " package manager
+Plugin 'henrik/vim-reveal-in-finder' " :Reveal
+Plugin 'junegunn/fzf' " fuzzy-find
+Plugin 'junegunn/fzf.vim' " fuzzy-find, plus
+Plugin 'junegunn/goyo.vim' " markdown: no distraction mode
+Plugin 'mattn/emmet-vim' " emmet!
+Plugin 'reedes/vim-pencil' " markdown
+Plugin 'scrooloose/nerdtree' " tree view
+Plugin 'sheerun/vim-polyglot' " syntax highlighting
+Plugin 'tpope/vim-commentary' " gcc, gcap
+Plugin 'tpope/vim-eunuch' " :Delete, :Rename, :SudoWrite, etc.
+Plugin 'tpope/vim-surround' " change parens
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'xsbeats/vim-blade'
-Plugin 'henrik/vim-reveal-in-finder'
-Plugin 'junegunn/goyo.vim'
-Plugin 'reedes/vim-pencil'
-Plugin 'docunext/closetag.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'rust-lang/rust.vim'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'ConradIrwin/vim-bracketed-paste'
-Plugin 'w0rp/ale'
+Plugin 'vim-scripts/AfterColors.vim' " allow customizing syntax highlighting
+Plugin 'w0rp/ale' " linting
 
 let g:airline_theme = "powerlineish"
 let g:airline_powerline_fonts = 0
