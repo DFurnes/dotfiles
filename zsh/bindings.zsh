@@ -25,3 +25,12 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+
+# start vim ctrlp from zsh
+ctrlp() {
+  zle reset-prompt
+  </dev/tty vim -c "Files!"
+  zle send-break
+}
+zle -N ctrlp
+bindkey "^p" ctrlp
