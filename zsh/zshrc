@@ -35,11 +35,15 @@ prompt purer
 
 # Completion:
 # case-insensitive (all), partial-word and then substring completion
-autoload -U compinit
-compinit
+autoload -U compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
     'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 set completion-ignore-case On
+
+# make completion speedier
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
 
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
