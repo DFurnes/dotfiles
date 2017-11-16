@@ -75,9 +75,12 @@ nmap <leader>h :nohlsearch<cr>
 
 " Quick file-switching via FZF
 map <C-p> :Files!<cr>
+map <C-r> :Recents!<cr>
 
+command! -bang Recents call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " NERDTree
 map <C-n> :call ToggleNERDTreeFind()<CR>
