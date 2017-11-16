@@ -6,6 +6,7 @@ set nocp  " we don't wanna be vi compatible.
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+Plugin 'vim-scripts/indentpython.vim'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'vim-scripts/AfterColors.vim'
 Plugin 'gmarik/vundle'
@@ -192,6 +193,17 @@ au BufNewFile,BufRead Brewfile set ft=sh
 " syntax highlighting for Lo-dash template files (.tpl.html)
 au BufRead,BufNewFile *.tpl.html set filetype=eruby.html
 au BufRead,BufNewFile *.ejs set filetype=eruby.html
+
+" python pep-8
+augroup BufNewFile,BufRead *.py
+  set tabstop=4
+  set softtabstop=4
+  set shiftwidth=4
+  set textwidth=79
+  set expandtab
+  set autoindent
+  set fileformat=unix
+augroup END
 
 " syntax highlighting for *.md files
 au BufRead,BufNewFile *.md set filetype=markdown
