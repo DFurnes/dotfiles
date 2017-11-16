@@ -2,11 +2,20 @@
 # -----
 
 # Homestead
-function hs() {
+function homestead() {
   DIRECTORY=$(pwd)
+  HOMESTEAD_DIRECTORY="$HOME/.homestead"
   HOME_RELATIVE_DIRECTORY=${DIRECTORY/$HOME/\~}
   DEFAULT="ssh --command \"cd $HOME_RELATIVE_DIRECTORY; bash\""
-  (cd ~/.homestead; eval "vagrant ${*:-$DEFAULT}")
+  (cd $HOMESTEAD_DIRECTORY; eval "vagrant ${*:-$DEFAULT}")
+}
+
+alias hs="homestead"
+
+function art() {
+  DIRECTORY=$(pwd)
+  HOME_RELATIVE_DIRECTORY=${DIRECTORY/$HOME/\~}
+  (cd ~/.homestead; eval "vagrant ssh --command \"cd $HOME_RELATIVE_DIRECTORY; php artisan ${*}\"")
 }
 
 # Clear screen and scroll-back
