@@ -8,6 +8,8 @@ export TERM=screen-256color-bce
 
 export GPG_TTY=$(tty)
 
+export GOPATH=$HOME/Source/go
+
 # Browser
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
