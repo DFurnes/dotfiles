@@ -2,6 +2,9 @@
 .svn
 *~
 
+# zsh
+zsh/zshenv
+
 # vim
 vim/swp
 vim/backups

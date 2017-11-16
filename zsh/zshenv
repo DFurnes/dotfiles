@@ -1,7 +1,0 @@
-#
-# Defines environment variables.
-#
-
-export DS_VAGRANT_MOUNT_NFS=1
-export RUST_SRC_PATH=$HOME/Source/vendor/rust/src
-
