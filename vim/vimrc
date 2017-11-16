@@ -73,14 +73,22 @@ nnoremap sk <C-w>k
 " shortcut to hide search highlights
 nmap <leader>h :nohlsearch<cr>
 
-" Open NerdTree
-map <D-1> :NERDTreeToggle %<CR>
-map <D-2> :NERDTreeFind<CR>
 " Quick file-switching via FZF
 map <C-p> :Files!<cr>
 
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" NERDTree
+map <C-n> :call ToggleNERDTreeFind()<CR>
+
+function! ToggleNERDTreeFind()
+    if g:NERDTree.IsOpen()
+        execute ':NERDTreeClose'
+    else
+        execute ':NERDTreeFind'
+    endif
+endfunction
 
 
 
@@ -138,7 +146,6 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 let g:UltiSnipsExpandTrigger="<C-S>"
 let g:UltiSnipsJumpForwardTrigger="<C-S>"
 let g:UltiSnipsJumpBackwardTrigger="<C-D>"
-
 
 
 " Delimitmate
