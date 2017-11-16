@@ -76,10 +76,12 @@ nmap <leader>h :nohlsearch<cr>
 " Open NerdTree
 map <D-1> :NERDTreeToggle %<CR>
 map <D-2> :NERDTreeFind<CR>
+" Quick file-switching via FZF
+map <C-p> :Files!<cr>
 
-" Quick file-switching via Ctrl-P
-map <C-p> :CtrlP<cr>
-map <C-t> :CtrlPBufTag<cr>
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
 
 
 " Appearance & color scheme
@@ -137,21 +139,6 @@ let g:UltiSnipsExpandTrigger="<C-S>"
 let g:UltiSnipsJumpForwardTrigger="<C-S>"
 let g:UltiSnipsJumpBackwardTrigger="<C-D>"
 
-
-" Ctrl-P
-" ------
-
-" Use The Silver Searcher if installed
-if executable('ag')
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-" ignores for ctrl-p
-set wildignore+=*/tmp/*,*/vendor/*,*/dist/*,*/node_modules/*,*/html/*,*/.sass_cache/*,*.so,*.swp,*.zip     " Linux/MacOSX
 
 
 " Delimitmate
