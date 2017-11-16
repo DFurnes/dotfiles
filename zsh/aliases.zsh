@@ -84,6 +84,19 @@ function trash() { mv $1 ~/.Trash } # move file to the trash
 alias vi="vim"
 alias mvim="/Applications/MacVim.app/Contents/MacOS/Vim -g"
 
+# Fuzzy-find ^P
+fuzzy() {
+  local files
+  IFS=$'\n' files=($(fzf --multi --select-1 --exit-0 \
+    --preview '[[ $(file --mime {}) =~ binary ]] &&
+    echo {} is a binary file ||
+    (highlight -O ansi -l {} ||
+    coderay {} ||
+    cat {}) 2> /dev/null | head -500'))
+  if [[ -n "$files" ]]; then
+    ${EDITOR:-vim} "${files[@]}"
+  fi
+}
 
 # Git & GitHub
 # ------------
