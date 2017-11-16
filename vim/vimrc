@@ -1,34 +1,32 @@
 set nocp  " we don't wanna be vi compatible.
 
-" Vundle 
+" Plugins
 " -----------------
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-Plugin 'ConradIrwin/vim-bracketed-paste' " iterm2 paste support
-Plugin 'HerringtonDarkholme/yats.vim' " TypeScript syntax 
-Plugin 'NLKNguyen/papercolor-theme' " pretty color scheme
-Plugin 'Raimondi/delimitMate' " add matching quote, parens, brackets
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'docunext/closetag.vim' " auto-</tag>
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'gmarik/vundle' " package manager
-Plugin 'henrik/vim-reveal-in-finder' " :Reveal
-Plugin 'junegunn/fzf' " fuzzy-find
-Plugin 'junegunn/fzf.vim' " fuzzy-find, plus
-Plugin 'junegunn/goyo.vim' " markdown: no distraction mode
-Plugin 'mattn/emmet-vim' " emmet!
-Plugin 'reedes/vim-pencil' " markdown
-Plugin 'scrooloose/nerdtree' " tree view
-Plugin 'sheerun/vim-polyglot' " syntax highlighting
-Plugin 'tpope/vim-commentary' " gcc, gcap
-Plugin 'tpope/vim-eunuch' " :Delete, :Rename, :SudoWrite, etc.
-Plugin 'tpope/vim-surround' " change parens
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-scripts/AfterColors.vim' " allow customizing syntax highlighting
-Plugin 'w0rp/ale' " linting
+call plug#begin('~/.vim/plugged')
+  Plug 'ConradIrwin/vim-bracketed-paste' " iterm2 paste support
+  Plug 'HerringtonDarkholme/yats.vim' " TypeScript syntax 
+  Plug 'NLKNguyen/papercolor-theme' " pretty color scheme
+  Plug 'Raimondi/delimitMate' " add matching quote, parens, brackets
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'docunext/closetag.vim' " auto-</tag>
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'gmarik/vundle' " package manager
+  Plug 'henrik/vim-reveal-in-finder' " :Reveal
+  Plug 'junegunn/fzf' " fuzzy-find
+  Plug 'junegunn/fzf.vim' " fuzzy-find, plus
+  Plug 'junegunn/goyo.vim' " markdown: no distraction mode
+  Plug 'mattn/emmet-vim' " emmet!
+  Plug 'reedes/vim-pencil' " markdown
+  Plug 'scrooloose/nerdtree' " tree view
+  Plug 'sheerun/vim-polyglot' " syntax highlighting
+  Plug 'tpope/vim-commentary' " gcc, gcap
+  Plug 'tpope/vim-eunuch' " :Delete, :Rename, :SudoWrite, etc.
+  Plug 'tpope/vim-surround' " change parens
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'vim-scripts/AfterColors.vim' " allow customizing syntax highlighting
+  Plug 'w0rp/ale' " linting
+call plug#end()
 
 let g:airline_theme = "powerlineish"
 let g:airline_powerline_fonts = 0
@@ -76,7 +74,6 @@ nmap <leader>h :nohlsearch<cr>
 " Quick file-switching via FZF
 map <C-p> :Files!<cr>
 map <C-r> :Recents!<cr>
-
 command! -bang Recents call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -135,6 +132,7 @@ set guifont=Menlo:h12
 set guioptions-=m
 set guioptions-=t
 set guioptions-=r
+set guioptions-=e
 
 " hide splash screen
 set shortmess+=I

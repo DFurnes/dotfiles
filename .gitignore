@@ -12,5 +12,4 @@ vim/undodir
 .netrwhist
 
 # vundle
-bundle/
-!bundle/vundle
+vim/plugged
