@@ -3,8 +3,9 @@ set nocp  " we don't wanna be vi compatible.
 " Plugins
 " -----------------
 call plug#begin('~/.vim/plugged')
+  Plug 'airblade/vim-gitgutter' " git gutter
   Plug 'ConradIrwin/vim-bracketed-paste' " iterm2 paste support
-  Plug 'HerringtonDarkholme/yats.vim' " TypeScript syntax 
+  Plug 'HerringtonDarkholme/yats.vim' " TypeScript syntax
   Plug 'NLKNguyen/papercolor-theme' " pretty color scheme
   Plug 'Raimondi/delimitMate' " add matching quote, parens, brackets
   Plug 'christoomey/vim-tmux-navigator'
@@ -26,71 +27,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline-themes'
   Plug 'vim-scripts/AfterColors.vim' " allow customizing syntax highlighting
   Plug 'w0rp/ale' " linting
+
+  if has('nvim')
+    Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  endif
 call plug#end()
-
-let g:airline_theme = "powerlineish"
-let g:airline_powerline_fonts = 0
-let g:airline_symbols = {}
-
-" unicode symbols
-let g:airline_left_sep = ''
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'P'
-let g:airline_symbols.paste = 'P'
-let g:airline_symbols.paste = 'P'
-let g:airline_symbols.whitespace = 'Ξ'
-
-
-" Aliases
-" -----------------
-" Set leader to ',' since its easier to type
-let mapleader = ","
-
-" shortcut to get out of insert mode.
-imap jj <Esc>
-
-" shortcut to toggle paste mode
-set pastetoggle=<leader>p
-
-" shortcuts for creating splits
-nnoremap <silent> vv <C-w>v
-nnoremap <silent> ss <C-w>s
-
-" shortcuts to switch between splits
-nnoremap sh <C-w>h
-nnoremap sl <C-w>l
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-
-" shortcut to hide search highlights
-nmap <leader>h :nohlsearch<cr>
-
-" Quick file-switching via FZF
-map <C-p> :Files!<cr>
-map <C-r> :Recents!<cr>
-command! -bang Recents call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-
-" NERDTree
-map <C-n> :call ToggleNERDTreeFind()<CR>
-
-function! ToggleNERDTreeFind()
-    if g:NERDTree.IsOpen()
-        execute ':NERDTreeClose'
-    else
-        execute ':NERDTreeFind'
-    endif
-endfunction
-
-
 
 " Appearance & color scheme
 " -------------------------
@@ -98,8 +41,16 @@ syntax enable
 set background=dark
 colorscheme PaperColor
 
-" fix background display issue in tmux
-set t_ut=
+" Don't mess up MacVim background
+if ! has('gui_running')
+  let g:PaperColor_Theme_Options = {
+        \   'theme': {
+        \     'default': {
+        \       'transparent_background': 1
+        \     }
+        \   }
+        \ }
+endif
 
 " use mouse in terminal vim
 set mouse=a
@@ -137,6 +88,74 @@ set guioptions-=e
 " hide splash screen
 set shortmess+=I
 
+" Airline
+let g:airline_theme = "powerlineish"
+let g:airline_powerline_fonts = 0
+let g:airline_symbols = {}
+let g:airline_left_sep = ''
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_sep = ''
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'P'
+let g:airline_symbols.paste = 'P'
+let g:airline_symbols.paste = 'P'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" Ale
+let g:ale_sign_error = '•'
+let g:ale_sign_warning = '•'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+highlight clear SignColumn
+
+" Aliases
+" -----------------
+" Set leader to ',' since its easier to type
+let mapleader = ","
+
+" shortcut to get out of insert mode.
+imap jj <Esc>
+
+" shortcut for opening tab
+nnoremap <silent> tt :tabnew<CR>
+
+" shortcuts for creating splits
+nnoremap <silent> vv <C-w>v
+nnoremap <silent> ss <C-w>s
+
+" shortcuts to switch between splits
+nnoremap sh <C-w>h
+nnoremap sl <C-w>l
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+
+" shortcut to hide search highlights
+nmap <leader>h :nohlsearch<cr>
+
+" Quick file-switching via FZF
+map <C-p> :Files!<cr>
+map <C-o> :Recents!<cr>
+command! -bang Recents call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" NERDTree
+map <C-n> :call ToggleNERDTreeFind()<CR>
+
+function! ToggleNERDTreeFind()
+  if g:NERDTree.IsOpen()
+    execute ':NERDTreeClose'
+  else
+    execute ':NERDTreeFind'
+  endif
+endfunction
+
+
 " Code Completion
 " ---------------
 set omnifunc=syntaxcomplete#Complete
@@ -161,7 +180,7 @@ let delimitMate_expand_cr=1
 
 " Remember last location in file (except git commit prompt)
 au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
-   \| exe "normal! g`\"" | endif
+      \| exe "normal! g`\"" | endif
 
 " automatically read a file that has changed on disk
 set autoread
@@ -246,3 +265,30 @@ set noswapfile
 set undofile " enables peristent undo (keeps history on file reload)
 set undolevels=1000 "maximum number of changes that can be undone
 set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+
+" NeoVim
+" ------
+
+if has('nvim')
+  " Required for operations modifying multiple buffers like rename.
+  set hidden
+
+  let g:LanguageClient_autoStart = 1
+  let g:LanguageClient_serverCommands = {
+        \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+        \ 'javascript.jsx': ['/usr/local/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+        \ }
+
+  " Automatically start PHP language server.
+  autocmd FileType php LanguageClientStart
+
+  nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+  nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+  nnoremap <leader>r :call LanguageClient_textDocument_rename()<CR>
+
+  " deoplete
+  let g:deoplete#enable_at_startup = 1
+  inoremap <silent><expr> <Tab>
+        \ pumvisible() ? "\<C-n>" :
+        \ deoplete#mappings#manual_complete()
+endif
