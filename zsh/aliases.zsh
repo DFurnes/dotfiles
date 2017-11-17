@@ -132,6 +132,8 @@ function gpuf() { git push --set-upstream origin $(git-branch-current) --force }
 function gsync() { git fetch upstream && git checkout dev && git rebase upstream/dev && git push origin dev } 
 function gsyncm() { git fetch upstream && git checkout master && git rebase upstream/master && git push origin master } 
 
+alias gcapuf="git add . && git commit --amend --no-edit && gpuf"
+
 
 # Vagrant
 # -------
