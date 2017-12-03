@@ -1,27 +1,35 @@
-set nocp  " we don't wanna be vi compatible.
+set encoding=utf-8
+scriptencoding utf-8
 
 " Plugins
 " -----------------
 call plug#begin('~/.vim/plugged')
-  Plug 'airblade/vim-gitgutter' " git gutter
   Plug 'ConradIrwin/vim-bracketed-paste' " iterm2 paste support
   Plug 'HerringtonDarkholme/yats.vim' " TypeScript syntax
   Plug 'NLKNguyen/papercolor-theme' " pretty color scheme
   Plug 'Raimondi/delimitMate' " add matching quote, parens, brackets
+  Plug 'airblade/vim-gitgutter' " git gutter
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'docunext/closetag.vim' " auto-</tag>
   Plug 'editorconfig/editorconfig-vim'
   Plug 'gmarik/vundle' " package manager
+  Plug 'godlygeek/tabular' " note: must come before vim-markdown!
   Plug 'henrik/vim-reveal-in-finder' " :Reveal
+  Plug 'jparise/vim-graphql' " graphql syntax
   Plug 'junegunn/fzf' " fuzzy-find
   Plug 'junegunn/fzf.vim' " fuzzy-find, plus
   Plug 'junegunn/goyo.vim' " markdown: no distraction mode
   Plug 'mattn/emmet-vim' " emmet!
+  Plug 'pangloss/vim-javascript' " adds updates not included in vim-polyglot
+  Plug 'plasticboy/vim-markdown' " adds updates not included in vim-polyglot
   Plug 'reedes/vim-pencil' " markdown
   Plug 'scrooloose/nerdtree' " tree view
   Plug 'sheerun/vim-polyglot' " syntax highlighting
+  Plug 'sjl/gundo.vim' " graphical undo!
   Plug 'tpope/vim-commentary' " gcc, gcap
   Plug 'tpope/vim-eunuch' " :Delete, :Rename, :SudoWrite, etc.
+  Plug 'tpope/vim-fugitive' " git helpers like :Gblame and :Gdiff
+  Plug 'tpope/vim-rhubarb' " github helpers
   Plug 'tpope/vim-surround' " change parens
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -40,6 +48,8 @@ call plug#end()
 syntax enable
 set background=dark
 colorscheme PaperColor
+
+set nofoldenable
 
 " Don't mess up MacVim background
 if ! has('gui_running')
@@ -62,7 +72,7 @@ set clipboard=unnamed
 set ruler " show line numbers
 set relativenumber " relative line numbers
 set number " shows current line as absolute line number (Vim 7.4+)
-set cul " highlights current line
+set cursorline " highlights current line
 
 " open splits below/right of current area, like a sane person
 set splitbelow
@@ -89,33 +99,42 @@ set guioptions-=e
 set shortmess+=I
 
 " Airline
-let g:airline_theme = "powerlineish"
+let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 0
 let g:airline_symbols = {}
 let g:airline_left_sep = ''
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_sep = ''
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.linenr = '' " ¶
+let g:airline_symbols.maxlinenr = ''  " ln
 let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'P'
-let g:airline_symbols.paste = 'P'
 let g:airline_symbols.paste = 'P'
 let g:airline_symbols.whitespace = 'Ξ'
 
+let g:airline_section_x='' " hide tagbar, filetype, virtualenv
+let g:airline_section_y='' " hide fileencoding, fileformat
+
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#warning_symbol = '▲'
+let g:airline#extensions#ale#error_symbol = '✗'
+
 " Ale
-let g:ale_sign_error = '•'
-let g:ale_sign_warning = '•'
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight clear SignColumn
 
+" Git gutter
+let g:gitgutter_sign_added = '·'
+let g:gitgutter_sign_modified = '·'
+let g:gitgutter_sign_modified_removed = '≃'
+
 " Aliases
 " -----------------
 " Set leader to ',' since its easier to type
-let mapleader = ","
+let g:mapleader = ','
 
 " shortcut to get out of insert mode.
 imap jj <Esc>
@@ -139,6 +158,7 @@ nmap <leader>h :nohlsearch<cr>
 " Quick file-switching via FZF
 map <C-p> :Files!<cr>
 map <C-o> :Recents!<cr>
+map <C-b> :Buffers<cr>
 command! -bang Recents call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -160,27 +180,29 @@ endfunction
 " ---------------
 set omnifunc=syntaxcomplete#Complete
 
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger="<C-S>"
-let g:UltiSnipsJumpForwardTrigger="<C-S>"
-let g:UltiSnipsJumpBackwardTrigger="<C-D>"
+let g:UltiSnipsExpandTrigger='<C-S>'
+let g:UltiSnipsJumpForwardTrigger='<C-S>'
+let g:UltiSnipsJumpBackwardTrigger='<C-D>'
 
 
 " Delimitmate
 " -----------
 
 " let delimitmate expand carriage returns with correct indentation
-let delimitMate_expand_cr=1
+let g:delimitMate_expand_cr=1
 
 
 " Opening/closing files
 " ---------------------
 
 " Remember last location in file (except git commit prompt)
-au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
+augroup remember
+  au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal! g`\"" | endif
+augroup END
 
 " automatically read a file that has changed on disk
 set autoread
@@ -192,7 +214,6 @@ syntax on
 filetype off
 filetype indent on
 filetype plugin on
-set encoding=utf-8
 
 " json syntax highlighting
 au BufNewFile,BufRead *.json set ft=javascript
@@ -217,6 +238,8 @@ augroup END
 
 " syntax highlighting for *.md files
 au BufRead,BufNewFile *.md set filetype=markdown
+
+let g:vim_markdown_math = 1
 
 " configure plugins for writing with markdown
 let g:pencil#wrapModeDefault = 'soft'
@@ -243,8 +266,20 @@ set smartindent
 set nocindent
 
 " use tabs in makefiles
-au FileType make setlocal noexpandtab
+augroup makefiles
+  au FileType make setlocal noexpandtab
+augroup END
 
+" highlight docblocks in php
+function! PhpSyntaxOverride()
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
 
 " Search
 " ------
@@ -280,7 +315,9 @@ if has('nvim')
         \ }
 
   " Automatically start PHP language server.
-  autocmd FileType php LanguageClientStart
+  augroup php_language_server
+    autocmd FileType php LanguageClientStart
+  augroup END
 
   nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
   nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
