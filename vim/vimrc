@@ -191,8 +191,6 @@ endfunction
 " ---------------
 set omnifunc=syntaxcomplete#Complete
 
-let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
-
 " UltiSnips
 let g:UltiSnipsExpandTrigger='<C-S>'
 let g:UltiSnipsJumpForwardTrigger='<C-S>'
