@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'docunext/closetag.vim' " auto-</tag>
   Plug 'editorconfig/editorconfig-vim'
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'gmarik/vundle' " package manager
   Plug 'godlygeek/tabular' " note: must come before vim-markdown!
   Plug 'henrik/vim-reveal-in-finder' " :Reveal
@@ -155,6 +156,16 @@ nnoremap sk <C-w>k
 " shortcut to hide search highlights
 nmap <leader>h :nohlsearch<cr>
 
+" build
+augroup builds
+  autocmd FileType go nmap <leader>b  <Plug>(go-build)
+augroup END
+
+" run go tests
+augroup tests
+  autocmd FileType go nmap <leader>t  <Plug>(go-test)
+augroup END
+
 " Quick file-switching via FZF
 map <C-p> :Files!<cr>
 map <C-o> :Recents!<cr>
@@ -198,6 +209,8 @@ let g:delimitMate_expand_cr=1
 " Opening/closing files
 " ---------------------
 
+set autowrite
+
 " Remember last location in file (except git commit prompt)
 augroup remember
   au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
@@ -224,6 +237,9 @@ au BufNewFile,BufRead Brewfile set ft=sh
 " syntax highlighting for Lo-dash template files (.tpl.html)
 au BufRead,BufNewFile *.tpl.html set filetype=eruby.html
 au BufRead,BufNewFile *.ejs set filetype=eruby.html
+
+" go
+let g:go_fmt_command = 'goimports'
 
 " python pep-8
 augroup BufNewFile,BufRead *.py
