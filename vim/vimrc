@@ -241,6 +241,8 @@ filetype off
 filetype indent on
 filetype plugin on
 
+" .env.example syntax highlighting
+au BufNewFile,BufRead *.env.example set ft=sh
 
 " jbuilder syntax highlighting
 au BufNewFile,BufRead Brewfile set ft=sh
