@@ -201,6 +201,9 @@ function! ToggleNERDTreeFind()
   endif
 endfunction
 
+" view git changes for hunk
+nmap <leader>g <Plug>GitGutterPreviewHunk
+
 
 " Code Completion
 " ---------------
