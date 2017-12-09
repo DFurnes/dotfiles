@@ -241,8 +241,6 @@ filetype off
 filetype indent on
 filetype plugin on
 
-" json syntax highlighting
-au BufNewFile,BufRead *.json set ft=javascript
 
 " jbuilder syntax highlighting
 au BufNewFile,BufRead Brewfile set ft=sh
