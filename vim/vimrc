@@ -253,6 +253,10 @@ au BufRead,BufNewFile *.ejs set filetype=eruby.html
 
 " go
 let g:go_fmt_command = 'goimports'
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
 
 " python pep-8
 augroup BufNewFile,BufRead *.py
