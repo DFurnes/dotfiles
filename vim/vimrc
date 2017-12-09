@@ -23,6 +23,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/emmet-vim' " emmet!
   Plug 'pangloss/vim-javascript' " adds updates not included in vim-polyglot
   Plug 'plasticboy/vim-markdown' " adds updates not included in vim-polyglot
+  Plug 'prettier/vim-prettier', {
+    \ 'do': 'npm install',
+    \ 'for': ['javascript', 'css', 'scss', 'graphql', 'markdown'] }
   Plug 'reedes/vim-pencil' " markdown
   Plug 'scrooloose/nerdtree' " tree view
   Plug 'sheerun/vim-polyglot' " syntax highlighting
@@ -305,6 +308,15 @@ endfunction
 augroup phpSyntaxOverride
   autocmd!
   autocmd FileType php call PhpSyntaxOverride()
+augroup END
+
+
+" Formatting
+" ----------
+
+let g:prettier#autoformat = 0
+augroup prettier
+  autocmd BufWritePre *.js,*.css,*.scss,*.graphql,*.md PrettierAsync
 augroup END
 
 " Search
