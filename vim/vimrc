@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'ConradIrwin/vim-bracketed-paste' " iterm2 paste support
   Plug 'HerringtonDarkholme/yats.vim' " TypeScript syntax
   Plug 'NLKNguyen/papercolor-theme' " pretty color scheme
-  Plug 'Raimondi/delimitMate' " add matching quote, parens, brackets
+  Plug 'jiangmiao/auto-pairs' " add matching quote, parens, brackets
   Plug 'airblade/vim-gitgutter' " git gutter
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'docunext/closetag.vim' " auto-</tag>
@@ -208,6 +208,9 @@ nmap <leader>g <Plug>GitGutterPreviewHunk
 " Code Completion
 " ---------------
 set omnifunc=syntaxcomplete#Complete
+
+" fix <Enter> behavior when autocomplete is open.
+inoremap <expr> <CR> "\<C-g>u\<CR>"
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger='<C-S>'
