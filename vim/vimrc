@@ -24,8 +24,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'pangloss/vim-javascript' " adds updates not included in vim-polyglot
   Plug 'plasticboy/vim-markdown' " adds updates not included in vim-polyglot
   Plug 'prettier/vim-prettier', {
-    \ 'do': 'npm install',
-    \ 'for': ['javascript', 'css', 'scss', 'graphql', 'markdown'] }
+     \ 'for': ['javascript', 'css', 'scss', 'graphql', 'markdown'] }
   Plug 'reedes/vim-pencil' " markdown
   Plug 'scrooloose/nerdtree' " tree view
   Plug 'sheerun/vim-polyglot' " syntax highlighting
@@ -41,7 +40,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'w0rp/ale' " linting
 
   if has('nvim')
-    Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'autozimu/LanguageClient-neovim', {
+          \ 'branch': 'next',
+          \ 'do': 'bash install.sh',
+          \ }
     Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   endif
@@ -135,6 +137,9 @@ let g:gitgutter_sign_added = '·'
 let g:gitgutter_sign_modified = '·'
 let g:gitgutter_sign_modified_removed = '≃'
 
+" Git diff/merge
+set diffopt+=vertical
+
 " Aliases
 " -----------------
 " Set leader to ',' since its easier to type
@@ -174,6 +179,7 @@ nmap <leader>h :nohlsearch<cr>
 " build
 augroup builds
   autocmd FileType go nmap <leader>b  <Plug>(go-build)
+  autocmd FileType javascript nmap <leader>b  :!/usr/local/bin/node %<cr>
 augroup END
 
 " run go tests
@@ -181,10 +187,14 @@ augroup tests
   autocmd FileType go nmap <leader>t  <Plug>(go-test)
 augroup END
 
+" distraction free mode
+nmap <leader>m :Goyo<cr>
+
 " Quick file-switching via FZF
 map <C-p> :Files!<cr>
 map <C-o> :Recents!<cr>
 map <C-b> :Buffers<cr>
+map <C-d> :BTags<cr>
 command! -bang Recents call fzf#vim#history(fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -262,7 +272,7 @@ let g:go_fmt_command = 'goimports'
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
+let g:go_highlight_function_calls = 1
 
 " python pep-8
 augroup BufNewFile,BufRead *.py
@@ -278,7 +288,9 @@ augroup END
 " syntax highlighting for *.md files
 au BufRead,BufNewFile *.md set filetype=markdown
 
+let g:vim_markdown_fenced_languages = ['bash=sh', 'js=javascript']
 let g:vim_markdown_math = 1
+let g:goyo_width = 100
 
 " configure plugins for writing with markdown
 let g:pencil#wrapModeDefault = 'soft'
@@ -287,13 +299,12 @@ let g:pencil#conceallevel = 0
 augroup pencil
   autocmd!
   autocmd FileType markdown     call pencil#init()
-  autocmd FileType text         call pencil#init({'wrap': 'hard'})
 augroup END
 
 set showmatch " show matching brackets
 
-" configure javascript libraries used for syntax highlighting
-let g:used_javascript_libs = 'jquery,underscore,requirejs'
+" enable JSDoc syntax highlighting
+let g:javascript_plugin_jsdoc = 1
 
 " set default indentation settings
 set expandtab
@@ -359,14 +370,11 @@ if has('nvim')
   let g:LanguageClient_autoStart = 1
   let g:LanguageClient_serverCommands = {
         \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-        \ 'javascript.jsx': ['/usr/local/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+        \ 'javascript.jsx': ['javascript-typescript-stdio'],
+        \ 'python': ['pyls'],
         \ }
 
-  " Automatically start PHP language server.
-  augroup php_language_server
-    autocmd FileType php LanguageClientStart
-  augroup END
-
+  map <C-k> :call LanguageClient_textDocument_documentSymbol()<CR>
   nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
   nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
   nnoremap <leader>r :call LanguageClient_textDocument_rename()<CR>
