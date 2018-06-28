@@ -132,6 +132,7 @@ alias gpl="git pull"
 alias gcl="git clone"
 alias gclean="git fetch --prune --all && git branch --merged dev | grep -v 'dev' | xargs git branch -d && git branch"
 alias gh="hub browse"
+alias gd="github"
 function gpr() {
   hub compare $(git-branch-current)
 }
