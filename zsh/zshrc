@@ -22,6 +22,9 @@ setopt APPEND_HISTORY
 source "$HOME/.dotfiles/zsh/bindings.zsh"
 source "$HOME/.dotfiles/zsh/aliases.zsh"
 
+# Source bash aliases if they exist:
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+
 # Quick edit:
 function zshrc() {
   vi $HOME/.dotfiles/zsh/zshrc

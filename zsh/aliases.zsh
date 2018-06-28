@@ -12,7 +12,7 @@ function homestead() {
   DIRECTORY=$(pwd)
   HOMESTEAD_DIRECTORY="$HOME/.homestead"
   HOME_RELATIVE_DIRECTORY=${DIRECTORY/$HOME/\~}
-  DEFAULT="ssh --command \"cd $HOME_RELATIVE_DIRECTORY; bash\""
+  DEFAULT="ssh --command \"cd $HOME_RELATIVE_DIRECTORY; /usr/bin/zsh\""
   (cd $HOMESTEAD_DIRECTORY; eval "vagrant ${*:-$DEFAULT}")
 }
 
