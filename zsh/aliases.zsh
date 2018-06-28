@@ -119,7 +119,10 @@ git-branch-current() {
   git rev-parse --abbrev-ref HEAD
 }
 
-alias git="hub"
+if [ -x "$(command -v nvim)" ]; then
+  alias git="hub"
+  alias gh="hub browse"
+fi
 alias g="git"
 alias gs="git status"
 alias gst="git stash"
@@ -135,8 +138,6 @@ alias glgg="git log"
 alias gp="git push"
 alias gpl="git pull"
 alias gcl="git clone"
-alias gclean="git fetch --prune --all && git branch --merged dev | grep -v 'dev' | xargs git branch -d && git branch"
-alias gh="hub browse"
 alias gd="github"
 function gpr() {
   hub compare $(git-branch-current)
