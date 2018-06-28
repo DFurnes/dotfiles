@@ -45,13 +45,14 @@ path=(
 )
 
 # rbenv
-eval "$(rbenv init -)"
-
 # Add Heroku toolkit to PATH
 export PATH="/usr/local/heroku/bin:$PATH"
 
 # Use Homebrew-installed PHP, rather than system default
 export PATH="$(brew --prefix homebrew/php/php70)/bin:$PATH"
+if [ -x "$(command -v rbenv)" ]; then
+	eval "$(rbenv init -)"
+fi
 
 # Set the default Less options.
 export LESS='-i -R -w -X -F'
