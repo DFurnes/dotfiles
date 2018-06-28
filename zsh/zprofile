@@ -2,10 +2,6 @@
 # Executes commands at login pre-zshrc.
 #
 
-# Tmux
-# Set $TERM explicitly to force tmux to recognize 256 colors
-export TERM=screen-256color-bce
-
 export GPG_TTY=$(tty)
 
 export GOPATH=$HOME/Developer/go
