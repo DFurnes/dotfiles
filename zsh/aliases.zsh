@@ -89,9 +89,14 @@ function trash() { mv $1 ~/.Trash } # move file to the trash
 
 # Vim
 # ---
-alias vi="nvim"
-alias vim="nvim"
-alias mvim="/Applications/MacVim.app/Contents/MacOS/Vim -g"
+if [ -x "$(command -v nvim)" ]; then
+  alias vi="nvim"
+  alias vim="nvim"
+fi
+
+if [ -f "/Applications/MacVim.app" ]; then
+  alias mvim="/Applications/MacVim.app/Contents/MacOS/Vim -g"
+fi
 
 # Fuzzy-find ^P
 fuzzy() {
