@@ -1,5 +1,4 @@
-[ -z "${SCRIPT_PATH}" ] && SCRIPT_PATH=$(readlink -f "$0")
-DOTFILES_DIRECTORY=$(dirname $BASH_SOURCE)
+DOTFILES_DIRECTORY="$( cd "$(dirname "$0")" ; pwd -P )"
 
 # copy dotfiles to the correct places...
 ln -sf $DOTFILES_DIRECTORY/zsh/zshrc $HOME/.zshrc
