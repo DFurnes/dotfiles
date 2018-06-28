@@ -56,10 +56,15 @@ loc() { find $1 -name $2 | xargs wc -l }
 
 # get gzipped size
 function gz() {
-  echo "orig size    (bytes): "
-  cat "$1" | wc -c
-  echo "gzipped size (bytes): "
-  gzip -c "$1" | wc -c
+  bytes=$(cat $1 | wc -c)
+  bytes_gz=$(gzip -c $1 | wc -c)
+  bytes_per_kb="1024"
+
+  echo "original size (kb): "
+  echo "scale=2 ; $bytes / $bytes_per_kb" | bc
+
+  echo "gzipped size (kb): "
+  echo "scale=2 ; $bytes_gz / $bytes_per_kb" | bc
 }
 
 # Shortcuts
