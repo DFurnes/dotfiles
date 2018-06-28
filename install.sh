@@ -1,3 +1,4 @@
+[ -z "${SCRIPT_PATH}" ] && SCRIPT_PATH=$(readlink -f "$0")
 DOTFILES_DIRECTORY=$(dirname $BASH_SOURCE)
 
 # copy dotfiles to the correct places...
