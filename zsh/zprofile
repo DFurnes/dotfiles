@@ -34,22 +34,21 @@ cdpath=(
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  $HOME/.cargo/bin
-  ${GOPATH//://bin:}/bin
-  $HOME/.composer/vendor/bin
-  $HOME/.rbenv/bin
-  /usr/local/{bin,sbin}
-  /{bin,sbin}
-  /usr/{bin,sbin}
-  $path
+	$HOME/.cargo/bin
+	/usr/local/opt/php@7.0/bin
+	/usr/local/opt/php@7.0/sbin
+	$HOME/Library/Python/3.6/bin
+	$HOME/Library/Python/2.7/bin
+	${GOPATH//://bin:}/bin
+	$HOME/.composer/vendor/bin
+	$HOME/.rbenv/bin
+	/usr/local/{bin,sbin}
+	/{bin,sbin}
+	/usr/{bin,sbin}
+	$path
 )
 
 # rbenv
-# Add Heroku toolkit to PATH
-export PATH="/usr/local/heroku/bin:$PATH"
-
-# Use Homebrew-installed PHP, rather than system default
-export PATH="$(brew --prefix homebrew/php/php70)/bin:$PATH"
 if [ -x "$(command -v rbenv)" ]; then
 	eval "$(rbenv init -)"
 fi
