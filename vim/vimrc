@@ -219,6 +219,8 @@ nmap <leader>g <Plug>GitGutterPreviewHunk
 " ---------------
 set omnifunc=syntaxcomplete#Complete
 
+set completeopt=longest,menuone
+
 " fix <Enter> behavior when autocomplete is open.
 inoremap <expr> <CR> "\<C-g>u\<CR>"
 
