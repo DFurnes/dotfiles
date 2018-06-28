@@ -94,7 +94,7 @@ if [ -x "$(command -v nvim)" ]; then
   alias vim="nvim"
 fi
 
-if [ -f "/Applications/MacVim.app" ]; then
+if [ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]; then
   alias mvim="/Applications/MacVim.app/Contents/MacOS/Vim -g"
 fi
 
