@@ -394,3 +394,6 @@ if has('nvim')
     return !l:col || getline('.')[l:col - 1] =~? '\s'
   endfunction"}}}
 endif
+
+" italicize code comments... needs to be near the end!
+highlight Comment cterm=italic
