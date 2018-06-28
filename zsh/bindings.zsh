@@ -29,7 +29,11 @@ bindkey '^Z' fancy-ctrl-z
 # start vim ctrlp from zsh
 ctrlp() {
   zle reset-prompt
-  </dev/tty vim -c "Files!"
+  if [ -x "$(command -v nvim)" ]; then
+    </dev/tty nvim -c "Files!"
+  else
+    </dev/tty vim -c "Files!"
+  fi
   zle send-break
 }
 zle -N ctrlp
