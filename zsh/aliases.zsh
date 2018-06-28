@@ -1,6 +1,9 @@
 # Basic
 # -----
 
+# Python
+alias venv="source venv/bin/activate"
+
 # Jekyll
 alias j="bundle exec jekyll liveserve --incremental"
 
