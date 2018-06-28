@@ -28,7 +28,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the the list of directories that cd searches.
 cdpath=(
   $HOME/Sites 
-  $HOME/Source
+  $HOME/Developer
   $cdpath
 )
 
