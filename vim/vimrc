@@ -277,16 +277,6 @@ let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 
-" python pep-8
-augroup BufNewFile,BufRead *.py
-  set tabstop=4
-  set softtabstop=4
-  set shiftwidth=4
-  set textwidth=79
-  set expandtab
-  set autoindent
-  set fileformat=unix
-augroup END
 
 " syntax highlighting for *.md files
 au BufRead,BufNewFile *.md set filetype=markdown
