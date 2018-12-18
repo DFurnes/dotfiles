@@ -1,13 +1,25 @@
 # Basic
 # -----
 
-# Python
+# Clear screen and scroll-back, with a fun function name. :)
+# <http://apple.stackexchange.com/a/113168>
+function ✧() {
+  clear && PURER_PROMPT_COMMAND_COUNT=0 && printf '\e[3J'
+}
+alias clear="✧"
+alias c="clear"
+
+# macOS:
+alias lock="pmset displaysleepnow"
+alias flushdns="sudo killall -HUP mDNSResponder"
+
+# Python:
 alias venv="source venv/bin/activate"
 
-# Jekyll
+# Jekyll:
 alias j="bundle exec jekyll liveserve --incremental"
 
-# Homestead
+# Homestead:
 function homestead() {
   DIRECTORY=$(pwd)
   HOMESTEAD_DIRECTORY="$HOME/.homestead"
@@ -18,22 +30,6 @@ function homestead() {
 
 alias hs="homestead"
 
-function art() {
-  DIRECTORY=$(pwd)
-  HOME_RELATIVE_DIRECTORY=${DIRECTORY/$HOME/\~}
-  (cd ~/.homestead; eval "vagrant ssh --command \"cd $HOME_RELATIVE_DIRECTORY; php artisan ${*}\"")
-}
-
-# Clear screen and scroll-back
-# <http://apple.stackexchange.com/a/113168>
-alias clear="clear && PURER_PROMPT_COMMAND_COUNT=0 && printf '\e[3J'"
-alias c="clear"
-
-alias ws="pstorm"
-
-alias lock="pmset displaysleepnow"
-
-alias flushdns="sudo killall -HUP mDNSResponder"
 
 # File operations
 # ---------------
@@ -47,10 +43,6 @@ alias ll="ls -GFhl"
 
 # List directories, sorted by disk usage
 alias lfs="du -sckx * | sort -nr"
-
-# List files/directories in tree view
-alias ts="tree -L 2 -I node_modules"
-alias tl="tree -I node_modules"
 
 # Directory traversal shortcuts
 alias ...="cd ../.."
@@ -85,7 +77,7 @@ function chownme() { sudo chown -R $(whoami) $*}
 
 # OS X
 # ----
-alias oo="open ." # open current directory in OS X Finder
+function oo() { open ${*:-"."} }
 function port() { sudo lsof -i :$*; } # check what's running on this port
 function trash() { mv $1 ~/.Trash } # move file to the trash
 
@@ -100,20 +92,6 @@ if [ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]; then
   alias mvim="/Applications/MacVim.app/Contents/MacOS/Vim -g"
 fi
 
-# Fuzzy-find ^P
-fuzzy() {
-  local files
-  IFS=$'\n' files=($(fzf --multi --select-1 --exit-0 \
-    --preview '[[ $(file --mime {}) =~ binary ]] &&
-    echo {} is a binary file ||
-    (highlight -O ansi -l {} ||
-    coderay {} ||
-    cat {}) 2> /dev/null | head -500'))
-  if [[ -n "$files" ]]; then
-    ${EDITOR:-vim} "${files[@]}"
-  fi
-}
-
 # Git & GitHub
 # ------------
 
@@ -121,7 +99,7 @@ git-branch-current() {
   git rev-parse --abbrev-ref HEAD
 }
 
-if [ -x "$(command -v nvim)" ]; then
+if [ -x "$(command -v hub)" ]; then
   alias git="hub"
   alias gh="hub browse"
 fi
@@ -135,37 +113,22 @@ alias gb="git branch"
 alias gch="git checkout"
 alias gcb="git checkout -b"
 alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias glgp="git log --patch"
-alias glgg="git log"
 alias gp="git push"
 alias gpl="git pull"
 alias gcl="git clone"
 alias gd="github"
-function gpr() {
-  hub compare $(git-branch-current)
-}
+function gpr() { hub compare $(git-branch-current) }
 function gpu() { git push --set-upstream origin $(git-branch-current) } 
 function gpuf() { git push --set-upstream origin $(git-branch-current) --force } 
-function gsync() { git fetch upstream && git checkout dev && git rebase upstream/dev && git push origin dev } 
-function gsyncm() { git fetch upstream && git checkout master && git rebase upstream/master && git push origin master } 
 
-alias gcapuf="git add . && git commit --amend --no-edit && gpuf"
+# Papertrail
+# ----------
 
-
-# Vagrant
-# -------
-alias v="vagrant"
-alias vst="vagrant status"
-alias vup="vagrant up"
-alias vsp="vagrant suspend"
-alias vre="vagrant halt && vagrant reload"
-
-
-# DoSomething.org
-# ---------------
 alias pt="papertrail"
-alias ds-errors="papertrail --min-time '1 hour ago' -S 'All Errors' | cut -f 4 -d ' ' | sort | uniq -c"
 
+# Download all logs matching a pattern.
+# Usage: pt-archive <start date> <end date> <filter> <output>
+# $ pt-archive 2018-12-01 2018-12-02 "dosomething-northstar" "ns-logs"
 function pt-archive() {
   DIRECTORY=$(pwd)
   FILTER="${3:-\".*\"}"
@@ -195,6 +158,8 @@ function pt-archive() {
   cd - > /dev/null
 }
 
+# See how effective a log filter would be on a given dump.
+# Usage: log-filter <log_file> <filter>
 function log-filter() {
   LOG_FILE=$1
   FILTER=$2
@@ -207,11 +172,10 @@ function log-filter() {
   echo "$(($BYTES/1024/1024)) MB"
 }
 
+# DoSomething.org
+# ---------------
+alias ds-errors="papertrail --min-time '1 hour ago' -S 'All: Exceptions' | cut -f 4 -d ' ' | sort | uniq -c"
+
 # Fun
 # ---
 alias pilogs="papertrail -c ~/.papertrail.dfurnes.yml"
-alias nyan='telnet nyancat.dakko.us'
-
-mp4togif() {
-  ffmpeg -i $1 -vf scale=$2:-1 -r 10 -f image2pipe -vcodec ppm - | convert -delay 5 -loop 0 - output.gif
-}

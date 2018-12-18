@@ -260,17 +260,22 @@ filetype off
 filetype indent on
 filetype plugin on
 
-" .env.example syntax highlighting
-au BufNewFile,BufRead *.env.example set ft=sh
+set showmatch " show matching brackets
 
-" jbuilder syntax highlighting
+" set default indentation settings
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set backspace=2
+set autoindent
+set smartindent
+set nocindent
+
+" custom syntax highlighting:
+au BufNewFile,BufRead *.env.example set ft=sh
 au BufNewFile,BufRead Brewfile set ft=sh
 
-" syntax highlighting for Lo-dash template files (.tpl.html)
-au BufRead,BufNewFile *.tpl.html set filetype=eruby.html
-au BufRead,BufNewFile *.ejs set filetype=eruby.html
-
-" go
+" go:
 let g:go_fmt_command = 'goimports'
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -281,14 +286,11 @@ let g:go_highlight_function_calls = 1
 autocmd FileType terraform setlocal commentstring=#\ %s
 autocmd FileType vcl setlocal commentstring=#\ %s
 
-" syntax highlighting for *.md files
-au BufRead,BufNewFile *.md set filetype=markdown
-
+" markdown:
 let g:vim_markdown_fenced_languages = ['bash=sh', 'js=javascript']
 let g:vim_markdown_math = 1
 let g:goyo_width = 100
 
-" configure plugins for writing with markdown
 let g:pencil#wrapModeDefault = 'soft'
 let g:pencil#conceallevel = 0
 
@@ -297,19 +299,8 @@ augroup pencil
   autocmd FileType markdown     call pencil#init()
 augroup END
 
-set showmatch " show matching brackets
-
 " enable JSDoc syntax highlighting
 let g:javascript_plugin_jsdoc = 1
-
-" set default indentation settings
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set backspace=2
-set autoindent
-set smartindent
-set nocindent
 
 " use tabs in makefiles
 augroup makefiles
@@ -330,11 +321,11 @@ augroup END
 
 " Formatting
 " ----------
-
 let g:prettier#autoformat = 0
 augroup prettier
   autocmd BufWritePre *.js,*.css,*.scss,*.graphql,*.md PrettierAsync
 augroup END
+
 
 " Search
 " ------
@@ -346,8 +337,8 @@ set smartcase " ...but make it case-sensitive if not all lowercase
 
 " Swap, backup, and undo
 " ----------------------
-set backupdir^=~/.vim/backups//
-set undodir=~/.vim/undodir
+set backupdir=~/.vim/backups//
+set undodir=~/.vim/undodir//
 
 " disable swap file
 set noswapfile

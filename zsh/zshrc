@@ -2,7 +2,6 @@
 # Executes commands at the start of an interactive session.
 #
 
-# Zsh Options:
 # Quickly change directories (e.g. $ foo --> $ cd foo)
 setopt auto_cd 
 
@@ -26,20 +25,9 @@ source "$HOME/.dotfiles/zsh/aliases.zsh"
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
 # Quick edit:
-function zshrc() {
-  vi $HOME/.dotfiles/zsh/zshrc
-  source ~/.zshrc
-}
-
-function aliases() {
-  vi $HOME/.dotfiles/zsh/aliases.zsh
-  source ~/.zshrc
-}
-
-function bindings() {
-  vi $HOME/.dotfiles/zsh/bindings.zsh
-  source ~/.zshrc
-}
+function zshrc() { vi $HOME/.dotfiles/zsh/zshrc && source ~/.zshrc }
+function aliases() { vi $HOME/.dotfiles/zsh/aliases.zsh && source ~/.zshrc }
+function bindings() { vi $HOME/.dotfiles/zsh/bindings.zsh && source ~/.zshrc }
 
 # Purer prompt:
 # <https://github.com/dfurnes/purer>
