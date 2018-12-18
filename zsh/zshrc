@@ -6,13 +6,15 @@
 setopt auto_cd 
 
 # enable history
-SAVEHIST=100
-HISTFILE=~/.zsh_history
+export SAVEHIST=500000
+export SAVEHIST=500000
+export HISTFILE=~/.zsh_history
 
-# Don't write duplicates to history & remove extra blanks
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt APPEND_HISTORY
+# Share history between tabs, and avoid writing
+# duplicate records if same command is re-run.
+setopt share_history
+setopt hist_ignore_dups
+setopt hist_reduce_blanks
 
 # FZF shell integration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
