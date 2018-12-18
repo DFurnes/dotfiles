@@ -163,9 +163,53 @@ alias vre="vagrant halt && vagrant reload"
 
 # DoSomething.org
 # ---------------
+alias pt="papertrail"
+alias ds-errors="papertrail --min-time '1 hour ago' -S 'All Errors' | cut -f 4 -d ' ' | sort | uniq -c"
+
+function pt-archive() {
+  DIRECTORY=$(pwd)
+  FILTER="${3:-\".*\"}"
+
+  cd $(mktemp -d)
+
+  echo "Downloading log archives from $1 to $2..."
+  curl -sH "X-Papertrail-Token: $PAPERTRAIL_API_KEY" https://papertrailapp.com/api/v1/archives.json |
+    grep -o '"filename":"[^"]*"' | egrep -o '[0-9-]+' |
+    awk '$0 >= "'$1'" && $0 < "'$2'" {
+      print "output " $0 ".tsv.gz"
+      print "url https://papertrailapp.com/api/v1/archives/" $0 "/download"
+    }' | curl --progress-bar -fLH "X-Papertrail-Token: $PAPERTRAIL_API_KEY" -K-
+
+
+  echo "Unzipping compressed archives..."
+  gunzip *.tsv.gz
+
+  echo "Filtering by '$FILTER' & concatenating to one file..."
+  cat *.tsv | grep -E $FILTER > $DIRECTORY/$4.tsv
+  
+  echo "Cleaning up..."
+  rm *.tsv
+
+  echo "All done! 🎊 $DIRECTORY/$4.tsv!"
+
+  cd - > /dev/null
+}
+
+function log-filter() {
+  LOG_FILE=$1
+  FILTER=$2
+
+  LINES=$(grep $FILTER $LOG_FILE | wc -l)
+  BYTES=$(grep $FILTER $LOG_FILE | wc -c)
+  TOTAL_BYTES=$(cat $LOG_FILE | wc -c)
+
+  echo "$LINES matching log lines"
+  echo "$(($BYTES/1024/1024)) MB"
+}
 
 # Fun
 # ---
+alias pilogs="papertrail -c ~/.papertrail.dfurnes.yml"
 alias nyan='telnet nyancat.dakko.us'
 
 mp4togif() {
