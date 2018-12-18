@@ -38,6 +38,10 @@ export PURE_PROMPT_SYMBOL_COLOR="white"
 export PURE_PROMPT_SYMBOL="λ"
 prompt purer
 
+# Bat (cat clone):
+export BAT_PAGER='less -RF'
+export BAT_STYLE='numbers,changes'
+
 # Completion:
 # case-insensitive (all), partial-word and then substring completion
 autoload -U compinit && compinit
