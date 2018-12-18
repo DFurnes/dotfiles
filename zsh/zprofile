@@ -36,11 +36,6 @@ path=(
 	$path
 )
 
-# rbenv
-if [ -x "$(command -v rbenv)" ]; then
-	eval "$(rbenv init -)"
-fi
-
 # Set the default Less options.
 export LESS='-i -R -w -X -F'
 

@@ -42,7 +42,6 @@ brew "pipenv"
 brew "postgresql", restart_service: true
 brew "python"
 brew "python@2"
-brew "rbenv"
 brew "redis", restart_service: true
 brew "rust"
 brew "siege"
