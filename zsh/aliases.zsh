@@ -33,6 +33,8 @@ alias ws="pstorm"
 
 alias lock="pmset displaysleepnow"
 
+alias flushdns="sudo killall -HUP mDNSResponder"
+
 # File operations
 # ---------------
 
