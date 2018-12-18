@@ -1,6 +1,9 @@
 # Basic
 # -----
 
+# Better built-ins:
+alias cat="bat"
+
 # Clear screen and scroll-back, with a fun function name. :)
 # <http://apple.stackexchange.com/a/113168>
 function ✧() {
