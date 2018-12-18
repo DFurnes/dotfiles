@@ -277,6 +277,9 @@ let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 
+" comment settings for terraform/hcl
+autocmd FileType terraform setlocal commentstring=#\ %s
+autocmd FileType vcl setlocal commentstring=#\ %s
 
 " syntax highlighting for *.md files
 au BufRead,BufNewFile *.md set filetype=markdown
