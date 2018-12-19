@@ -2,7 +2,9 @@
 # -----
 
 # Better built-ins:
-alias cat="bat"
+if [ -x "$(command -v bat)" ]; then
+  alias cat="bat"
+fi
 
 # Clear screen and scroll-back, with a fun function name. :)
 # <http://apple.stackexchange.com/a/113168>
