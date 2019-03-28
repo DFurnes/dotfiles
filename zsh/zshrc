@@ -6,9 +6,9 @@
 setopt auto_cd 
 
 # enable history
-export SAVEHIST=500000
-export SAVEHIST=500000
-export HISTFILE=~/.zsh_history
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTFILE="$HOME/.zsh_history"
 
 # Share history between tabs, and avoid writing
 # duplicate records if same command is re-run.
