@@ -33,9 +33,12 @@ function bindings() { vi $HOME/.dotfiles/zsh/bindings.zsh && source ~/.zshrc }
 
 # Purer prompt:
 # <https://github.com/dfurnes/purer>
+bold=$(tput bold)
+normal=$(tput sgr0)
 autoload -U promptinit && promptinit
 export PURE_PROMPT_SYMBOL_COLOR="white"
-export PURE_PROMPT_SYMBOL="λ"
+export PURE_PROMPT_SYMBOL="${bold}λ${normal}"
+export PURE_TITLE_PATH_FORMATTING="%c"
 prompt purer
 
 # Bat (cat clone):
