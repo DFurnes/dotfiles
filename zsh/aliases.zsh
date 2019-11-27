@@ -122,6 +122,7 @@ alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset 
 alias gp="git push"
 alias gpl="git pull"
 alias gcl="git clone"
+alias gcp="git cherry-pick"
 alias gd="github"
 function gpr() { hub compare $(git-branch-current) }
 function gpu() { git push --set-upstream origin $(git-branch-current) } 
