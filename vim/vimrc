@@ -307,6 +307,10 @@ augroup pencil
   autocmd FileType markdown     call pencil#init()
 augroup END
 
+augroup markdown_tags
+  au FileType markdown syntax match Label /\#[a-z]*/
+augroup end
+
 " goyo
 function! s:goyo_enter()
   let b:quitting = 0
