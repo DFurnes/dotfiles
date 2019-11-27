@@ -182,6 +182,20 @@ function log-filter() {
 # ---------------
 alias ds-errors="papertrail --min-time '1 hour ago' -S 'All: Exceptions' | cut -f 4 -d ' ' | sort | uniq -c"
 
+function nicedate() {
+  local SUFFIX
+  case `date +%-d` in
+    1|21|31) SUFFIX="st";;
+    2|22)    SUFFIX="nd";;
+    3|23)    SUFFIX="rd";;
+    *)       SUFFIX="th";;
+  esac
+
+  echo "$(date +%B)\ $(date +%-d)$SUFFIX"
+}
+
+alias standup="vim +/$(nicedate) ~/Notes/Standup\ -\ $(date +%B)\ $(date +%Y).md -c \"Goyo\" -c \"normal\! A\""
+
 # Fun
 # ---
 alias pilogs="papertrail -c ~/.papertrail.dfurnes.yml"
