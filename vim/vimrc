@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'godlygeek/tabular' " note: must come before vim-markdown!
   Plug 'hashivim/vim-terraform' " Terraform!
   Plug 'henrik/vim-reveal-in-finder' " :Reveal
+  Plug 'jkramer/vim-checkbox' " toggle markdown checkboxes with <leader>tt
   Plug 'jparise/vim-graphql' " graphql syntax
   Plug 'junegunn/fzf' " fuzzy-find
   Plug 'junegunn/fzf.vim' " fuzzy-find, plus
