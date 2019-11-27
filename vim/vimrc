@@ -13,9 +13,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'docunext/closetag.vim' " auto-</tag>
   Plug 'editorconfig/editorconfig-vim'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-  Plug 'fatih/vim-hclfmt' " HCL formatter!
   Plug 'gmarik/vundle' " package manager
   Plug 'godlygeek/tabular' " note: must come before vim-markdown!
+  Plug 'hashivim/vim-terraform' " Terraform!
   Plug 'henrik/vim-reveal-in-finder' " :Reveal
   Plug 'jparise/vim-graphql' " graphql syntax
   Plug 'junegunn/fzf' " fuzzy-find
@@ -360,6 +360,7 @@ augroup prettier
   autocmd BufWritePre *.js,*.css,*.scss,*.graphql,*.md PrettierAsync
 augroup END
 
+let g:terraform_fmt_on_save=1
 
 " Search
 " ------
