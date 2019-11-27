@@ -69,6 +69,15 @@ function gz() {
   echo "scale=2 ; $bytes_gz / $bytes_per_kb" | bc
 }
 
+# Get headers (using httpstat, if installed):
+if [ -x "$(command -v httpstat)" ]; then
+  alias headers="httpstat"
+else
+  alias headers="curl -svo /dev/null"
+fi
+
+function fheaders() { headers $* -H "Fastly-Debug: 1" }
+
 # Shortcuts
 # ---------
 
