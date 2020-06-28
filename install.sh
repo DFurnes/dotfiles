@@ -15,3 +15,7 @@ ln -sf $DOTFILES_DIRECTORY/vim/vimrc $HOME/.vimrc
 # Set up Vim directories:
 mkdir ~/.vim/backups
 mkdir ~/.vim/undodir
+
+
+# Quiet the macOS "Last Login" message:
+touch ~/.hushlogin
