@@ -85,6 +85,7 @@ alias hey="noglob hey"
 
 # NPM script shortcuts
 alias s="npm start"
+alias d="npm run dev"
 alias t="npm test"
 
 function chownme() { sudo chown -R $(whoami) $*}
