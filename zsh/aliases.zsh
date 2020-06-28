@@ -116,7 +116,6 @@ git-branch-current() {
 
 if [ -x "$(command -v hub)" ]; then
   alias git="hub"
-  alias gh="hub browse"
   alias ci="hub ci-status --color -v | sed 's/?.*$//g'"
 fi
 alias g="git"
