@@ -79,6 +79,17 @@ fi
 # Enable iTerm2 shell integration (if installed):
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+
+# Enable rbenv & pyenv (if installed):
+if [ -x "$(command -v rbenv)" ]; then
+  eval "$(rbenv init -)"
+fi
+
+if [ -x "$(command -v pyenv)" ]; then
+  eval "$(pyenv init -)"
+fi
+
+# Run additional customizations:
 if [ -f "$HOME/.zshrc.local" ]; then
   source $HOME/.zshrc.local
 fi
