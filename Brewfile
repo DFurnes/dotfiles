@@ -59,28 +59,23 @@ brew "mongodb/brew/mongodb-community-shell"
 
 cask "ngrok"
 cask "quicklook-json"
-cask "smlnj"
+cask "tableplus"
 cask "ttscoff-mmd-quicklook"
 cask "vagrant"
 
 mas "1Blocker", id: 1107421413
 mas "1Password 7", id: 1333542190
-mas "DaisyDisk", id: 411643860
 mas "Fantastical", id: 975937182
 mas "GarageBand", id: 682658836
 mas "iA Writer", id: 775737590
-mas "Icon Slate", id: 439697913
 mas "Instapaper", id: 1481302432
 mas "JSONPeep", id: 1458969831
 mas "Keynote", id: 409183694
-mas "Kindle", id: 405399194
 mas "LastPass", id: 926036361
 mas "Lungo", id: 1263070803
 mas "Magnet", id: 441258766
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Paprika Recipe Manager 3", id: 1303222628
 mas "PiPer", id: 1421915518
-mas "Pixelmator Pro", id: 1289583905
 mas "Short Menu", id: 510109287
 mas "The Unarchiver", id: 425424353
