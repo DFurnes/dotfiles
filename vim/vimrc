@@ -192,7 +192,11 @@ augroup END
 " distraction free mode
 nmap <leader>m :Goyo<cr>
 
+" Command-S for fun
+map <C-s> :w<cr>
+
 " Quick file-switching via FZF
+map <D-p> :Files!<cr>
 map <C-p> :Files!<cr>
 map <C-o> :Recents!<cr>
 map <C-b> :Buffers<cr>
