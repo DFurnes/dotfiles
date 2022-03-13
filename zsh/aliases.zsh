@@ -24,18 +24,6 @@ alias venv="source venv/bin/activate"
 # Jekyll:
 alias j="bundle exec jekyll liveserve --incremental"
 
-# Homestead:
-function homestead() {
-  DIRECTORY=$(pwd)
-  HOMESTEAD_DIRECTORY="$HOME/.homestead"
-  HOME_RELATIVE_DIRECTORY=${DIRECTORY/$HOME/\~}
-  DEFAULT="ssh --command \"cd $HOME_RELATIVE_DIRECTORY; /usr/bin/zsh\""
-  (cd $HOMESTEAD_DIRECTORY; eval "vagrant ${*:-$DEFAULT}")
-}
-
-alias hs="homestead"
-
-
 # File operations
 # ---------------
 
@@ -80,8 +68,6 @@ function fheaders() { headers $* -H "Fastly-Debug: 1" }
 
 # Shortcuts
 # ---------
-
-alias hey="noglob hey"
 
 # NPM script shortcuts
 alias s="npm start"
@@ -137,76 +123,3 @@ alias gd="github"
 function gpr() { hub compare $(git-branch-current) }
 function gpu() { git push --set-upstream origin $(git-branch-current) } 
 function gpuf() { git push --set-upstream origin $(git-branch-current) --force } 
-
-# Papertrail
-# ----------
-
-alias pt="papertrail"
-
-# Download all logs matching a pattern.
-# Usage: pt-archive <start date> <end date> <filter> <output>
-# $ pt-archive 2018-12-01 2018-12-02 "dosomething-northstar" "ns-logs"
-function pt-archive() {
-  DIRECTORY=$(pwd)
-  FILTER="${3:-\".*\"}"
-
-  cd $(mktemp -d)
-
-  echo "Downloading log archives from $1 to $2..."
-  curl -sH "X-Papertrail-Token: $PAPERTRAIL_API_KEY" https://papertrailapp.com/api/v1/archives.json |
-    grep -o '"filename":"[^"]*"' | egrep -o '[0-9-]+' |
-    awk '$0 >= "'$1'" && $0 < "'$2'" {
-      print "output " $0 ".tsv.gz"
-      print "url https://papertrailapp.com/api/v1/archives/" $0 "/download"
-    }' | curl --progress-bar -fLH "X-Papertrail-Token: $PAPERTRAIL_API_KEY" -K-
-
-
-  echo "Unzipping compressed archives..."
-  gunzip *.tsv.gz
-
-  echo "Filtering by '$FILTER' & concatenating to one file..."
-  cat *.tsv | grep -E $FILTER > $DIRECTORY/$4.tsv
-  
-  echo "Cleaning up..."
-  rm *.tsv
-
-  echo "All done! 🎊 $DIRECTORY/$4.tsv!"
-
-  cd - > /dev/null
-}
-
-# See how effective a log filter would be on a given dump.
-# Usage: log-filter <log_file> <filter>
-function log-filter() {
-  LOG_FILE=$1
-  FILTER=$2
-
-  LINES=$(grep $FILTER $LOG_FILE | wc -l)
-  BYTES=$(grep $FILTER $LOG_FILE | wc -c)
-  TOTAL_BYTES=$(cat $LOG_FILE | wc -c)
-
-  echo "$LINES matching log lines"
-  echo "$(($BYTES/1024/1024)) MB"
-}
-
-# DoSomething.org
-# ---------------
-alias ds-errors="papertrail --min-time '1 hour ago' -S 'All: Exceptions' | cut -f 4 -d ' ' | sort | uniq -c"
-
-function nicedate() {
-  local SUFFIX
-  case `date +%-d` in
-    1|21|31) SUFFIX="st";;
-    2|22)    SUFFIX="nd";;
-    3|23)    SUFFIX="rd";;
-    *)       SUFFIX="th";;
-  esac
-
-  echo "$(date +%B)\ $(date +%-d)$SUFFIX"
-}
-
-alias standup="vim +/$(nicedate) ~/Notes/Standup\ -\ $(date +%B)\ $(date +%Y).md -c \"Goyo\" -c \"normal\! A\""
-
-# Fun
-# ---
-alias pilogs="papertrail -c ~/.papertrail.dfurnes.yml"
