@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'ConradIrwin/vim-bracketed-paste' " iterm2 paste support
   Plug 'HerringtonDarkholme/yats.vim' " TypeScript syntax
   Plug 'NLKNguyen/papercolor-theme' " pretty color scheme
+  Plug 'rakr/vim-one' " color scheme
   Plug 'jiangmiao/auto-pairs' " add matching quote, parens, brackets
   Plug 'airblade/vim-gitgutter' " git gutter
   Plug 'christoomey/vim-tmux-navigator'
@@ -54,8 +55,8 @@ call plug#end()
 " Appearance & color scheme
 " -------------------------
 syntax enable
-set background=dark
-colorscheme PaperColor
+colorscheme one
+set background=light
 
 set nofoldenable
 
@@ -107,7 +108,7 @@ set guioptions-=e
 set shortmess+=I
 
 " Airline
-let g:airline_theme = 'powerlineish'
+let g:airline_theme='one'
 let g:airline_powerline_fonts = 0
 let g:airline_symbols = {}
 let g:airline_left_sep = ''

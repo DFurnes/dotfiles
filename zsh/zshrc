@@ -34,7 +34,7 @@ function bindings() { vi $HOME/.dotfiles/zsh/bindings.zsh && source ~/.zshrc }
 # Purer prompt:
 # <https://github.com/dfurnes/purer>
 autoload -U promptinit && promptinit
-export PURE_PROMPT_SYMBOL_COLOR="white"
+export PURE_PROMPT_SYMBOL_COLOR="black"
 export PURE_PROMPT_SYMBOL="λ"
 prompt purer
 
