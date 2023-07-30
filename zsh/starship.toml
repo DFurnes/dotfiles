@@ -1,0 +1,33 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = "$character$username$hostname$directory$git_branch$git_status$cmd_duration "
+
+[cmd_duration]
+format = ' [$duration]($style)'
+style = 'bold fg:248'
+
+[character]
+success_symbol="[λ](bold)"
+error_symbol="[⚑](red)"
+vimcmd_symbol="[λ](bold fg:40)"
+
+[directory]
+truncation_length=1
+format='[$path]($style)'
+style='bold #ec4899'
+
+[git_branch]
+format=' on [$symbol$branch(:$remote_branch)]($style)'
+symbol=''
+
+[git_status]
+format="[$conflicted](red)[$modified$untracked](fg:248)[$ahead_behind](cyan)"
+style="bold gray"
+modified="*"
+untracked="+"
+
+[line_break]
+disabled = true
+
+[package]
+disabled = true

@@ -31,12 +31,9 @@ function zshrc() { vi $HOME/.dotfiles/zsh/zshrc && source ~/.zshrc }
 function aliases() { vi $HOME/.dotfiles/zsh/aliases.zsh && source ~/.zshrc }
 function bindings() { vi $HOME/.dotfiles/zsh/bindings.zsh && source ~/.zshrc }
 
-# Purer prompt:
-# <https://github.com/dfurnes/purer>
-autoload -U promptinit && promptinit
-export PURE_PROMPT_SYMBOL_COLOR="black"
-export PURE_PROMPT_SYMBOL="λ"
-prompt purer
+# Starship prompt <https://starship.rs>:
+eval "$(starship init zsh)"
+# source "/opt/homebrew/opt/spaceship/spaceship.zsh"
 
 # Bat (cat clone):
 export BAT_PAGER='less -RF'
@@ -83,6 +80,10 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Enable rbenv & pyenv (if installed):
 if [ -x "$(command -v rbenv)" ]; then
   eval "$(rbenv init -)"
+fi
+
+if [ -x "$(command -v nodenv)" ]; then
+  eval "$(nodenv init -)"
 fi
 
 if [ -x "$(command -v pyenv)" ]; then

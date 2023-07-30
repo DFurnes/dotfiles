@@ -9,7 +9,7 @@ fi
 # Clear screen and scroll-back, with a fun function name. :)
 # <http://apple.stackexchange.com/a/113168>
 function ✧() {
-  command clear && PURER_PROMPT_COMMAND_COUNT=0 && printf '\e[3J'
+  command clear && printf '\e[3J'
 }
 alias clear="✧"
 alias c="clear"
