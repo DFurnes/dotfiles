@@ -9,11 +9,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'NLKNguyen/papercolor-theme' " pretty color scheme
   Plug 'rakr/vim-one' " color scheme
   Plug 'jiangmiao/auto-pairs' " add matching quote, parens, brackets
-  Plug 'airblade/vim-gitgutter' " git gutter
+  Plug 'airblade/vim-gitgutter', { 'branch': 'main' } " git gutter
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'docunext/closetag.vim' " auto-</tag>
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
   Plug 'gmarik/vundle' " package manager
   Plug 'godlygeek/tabular' " note: must come before vim-markdown!
   Plug 'hashivim/vim-terraform' " Terraform!
