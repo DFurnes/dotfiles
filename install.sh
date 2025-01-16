@@ -9,11 +9,11 @@ ln -sf $DOTFILES_DIRECTORY/zsh/zprofile $HOME/.zprofile
 cp $DOTFILES_DIRECTORY/zsh/zshenv.example $DOTFILES_DIRECTORY/zsh/zshenv
 ln -sf $DOTFILES_DIRECTORY/zsh/zshenv $HOME/.zshenv
 
-ln -sf $DOTFILES_DIRECTORY/vim $HOME/.vim
+ln -hsF $DOTFILES_DIRECTORY/vim $HOME/.vim
 ln -sf $DOTFILES_DIRECTORY/vim/vimrc $HOME/.vimrc
 
-ln -sf $DOTFILES_DIRECTORY/yabai $HOME/.config/yabai
-ln -sf $DOTFILES_DIRECTORY/skhd $HOME/.config/skhd
+ln -hsF $DOTFILES_DIRECTORY/yabai $HOME/.config/yabai
+ln -hsF $DOTFILES_DIRECTORY/skhd $HOME/.config/skhd
 
 # Set up Vim directories:
 mkdir ~/.vim/backups
