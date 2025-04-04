@@ -20,8 +20,8 @@ setopt hist_reduce_blanks
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Read system metadata, if applicable:
-{ export DEVBOX_NAME=$(< /pay/conf/mydev-remote-name); } 2> /dev/null
-{ export DEVBOX_EMOJI=$(< /pay/conf/mydev-remote-emoji); } 2> /dev/null
+{ export DEVBOX_NAME=$(< /pay/conf/box-name); } 2> /dev/null
+{ export DEVBOX_EMOJI=$(< /pay/conf/box-emoji); } 2> /dev/null
 
 # Load aliases & bindings:
 source "$HOME/.dotfiles/zsh/bindings.zsh"
