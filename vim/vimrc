@@ -1,55 +1,6 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-" Plugins
-" -----------------
-call plug#begin('~/.vim/plugged')
-  Plug 'ConradIrwin/vim-bracketed-paste' " iterm2 paste support
-  Plug 'HerringtonDarkholme/yats.vim' " TypeScript syntax
-  Plug 'NLKNguyen/papercolor-theme' " pretty color scheme
-  Plug 'rakr/vim-one' " color scheme
-  Plug 'jiangmiao/auto-pairs' " add matching quote, parens, brackets
-  Plug 'airblade/vim-gitgutter', { 'branch': 'main' } " git gutter
-  Plug 'christoomey/vim-tmux-navigator'
-  Plug 'docunext/closetag.vim' " auto-</tag>
-  Plug 'editorconfig/editorconfig-vim'
-  Plug 'gmarik/vundle' " package manager
-  Plug 'godlygeek/tabular' " note: must come before vim-markdown!
-  Plug 'hashivim/vim-terraform' " Terraform!
-  Plug 'henrik/vim-reveal-in-finder' " :Reveal
-  Plug 'jkramer/vim-checkbox' " toggle markdown checkboxes with <leader>tt
-  Plug 'jparise/vim-graphql' " graphql syntax
-  Plug 'junegunn/fzf' " fuzzy-find
-  Plug 'junegunn/fzf.vim' " fuzzy-find, plus
-  Plug 'junegunn/goyo.vim' " markdown: no distraction mode
-  Plug 'mattn/emmet-vim' " emmet!
-  Plug 'pangloss/vim-javascript' " adds updates not included in vim-polyglot
-  Plug 'plasticboy/vim-markdown' " adds updates not included in vim-polyglot
-  Plug 'prettier/vim-prettier', {
-     \ 'for': ['javascript', 'css', 'scss', 'graphql', 'markdown'] }
-  Plug 'reedes/vim-pencil' " markdown
-  Plug 'scrooloose/nerdtree' " tree view
-  Plug 'sheerun/vim-polyglot' " syntax highlighting
-  Plug 'sjl/gundo.vim' " graphical undo!
-  Plug 'tpope/vim-commentary' " gcc, gcap
-  Plug 'tpope/vim-eunuch' " :Delete, :Rename, :SudoWrite, etc.
-  Plug 'tpope/vim-fugitive' " git helpers like :Gblame and :Gdiff
-  Plug 'tpope/vim-rhubarb' " github helpers
-  Plug 'tpope/vim-surround' " change parens
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'vim-scripts/AfterColors.vim' " allow customizing syntax highlighting
-  Plug 'w0rp/ale' " linting
-
-  if has('nvim')
-    Plug 'autozimu/LanguageClient-neovim', {
-          \ 'branch': 'next',
-          \ 'do': 'bash install.sh',
-          \ }
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  endif
-call plug#end()
-
 " Appearance & color scheme
 " -------------------------
 syntax enable
@@ -58,22 +9,11 @@ set background=light
 
 set nofoldenable
 
-" Don't mess up MacVim background
-if ! has('gui_running')
-  let g:PaperColor_Theme_Options = {
-        \   'theme': {
-        \     'default': {
-        \       'transparent_background': 1
-        \     }
-        \   }
-        \ }
-endif
-
 " use mouse in terminal vim
 set mouse=a
 
 " use system clipboard for default copy-and-paste register
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " line numbers
 set ruler " show line numbers
@@ -105,26 +45,27 @@ set guioptions-=e
 " hide splash screen
 set shortmess+=I
 
+set noshowmode
 " Airline
-let g:airline_theme='one'
-let g:airline_powerline_fonts = 0
-let g:airline_symbols = {}
-let g:airline_left_sep = ''
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.linenr = '' " ¶
-let g:airline_symbols.maxlinenr = ''  " ln
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'P'
-let g:airline_symbols.whitespace = 'Ξ'
+" let g:airline_theme='one'
+" let g:airline_powerline_fonts = 0
+" let g:airline_symbols = {}
+" let g:airline_left_sep = ''
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_symbols.linenr = '' " ¶
+" let g:airline_symbols.maxlinenr = ''  " ln
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'P'
+" let g:airline_symbols.whitespace = 'Ξ'
 
-let g:airline_section_x='' " hide tagbar, filetype, virtualenv
-let g:airline_section_y='' " hide fileencoding, fileformat
+" let g:airline_section_x='' " hide tagbar, filetype, virtualenv
+" let g:airline_section_y='' " hide fileencoding, fileformat
 
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#ale#warning_symbol = '▲'
-let g:airline#extensions#ale#error_symbol = '✗'
+" let g:airline#extensions#ale#enabled = 1
+" let g:airline#extensions#ale#warning_symbol = '▲'
+" let g:airline#extensions#ale#error_symbol = '✗'
 
 " Ale
 let g:ale_sign_warning = '▲'
@@ -219,6 +160,29 @@ endfunction
 " view git changes for hunk
 nmap <leader>g <Plug>GitGutterPreviewHunk
 
+" reveal in finder/nautilus
+function! s:Reveal()
+  if has('macunix')
+    let l:fcommand = "open -R"
+    let l:dcommand = "open"
+  else
+    let l:fcommand = "nautilus -s"
+    let l:dcommand = "nautilus"
+  endif
+
+  if filereadable(expand("%"))
+    let l:command = l:fcommand . " " . shellescape("%")
+  elseif getftype(expand("%:p:h")) == "dir"
+    let l:command = l:dcommand . " " . shellescape("%") . ":p:h"
+  else
+    let l:command = l:dcommand " ."
+  endif
+
+  execute ":silent! !" . l:command . "&"
+  redraw!
+endfunction
+
+command! Reveal call <SID>Reveal()
 
 " Code Completion
 " ---------------
@@ -376,8 +340,8 @@ set smartcase " ...but make it case-sensitive if not all lowercase
 
 " Swap, backup, and undo
 " ----------------------
-set backupdir=~/.vim/backups//
-set undodir=~/.vim/undodir//
+" set backupdir=~/.vim/backups//
+" set undodir=~/.vim/undodir//
 
 " disable swap file
 set noswapfile

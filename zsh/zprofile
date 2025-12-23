@@ -12,9 +12,13 @@ if [[ "$OSTYPE" == darwin* ]]; then
 fi
 
 # Editors
-export VISUAL='vim'
 export EDITOR='vim'
-export GIT_EDITOR='vim'
+if [ -x "$(command -v nvim)" ]; then
+  export EDITOR='nvim'
+fi
+
+export VISUAL="$EDITOR"
+export GIT_EDITOR="$EDITOR"
 export PAGER='less'
 
 export LESS='-i -R -w -F'

@@ -2,12 +2,12 @@
   description = "Example nix-darwin system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
 
-    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -24,6 +24,8 @@
         gnupg
         hub
         jq
+        neovim
+        nix-prefetch-github
         nodenv
         pinentry_mac
         silver-searcher
@@ -73,7 +75,16 @@
 
       # Allow non-free packages, like Claude Code:
       nixpkgs.config.allowUnfree = true;
+
+    fonts.packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.symbols-only
+      # powerline-fonts
+      # powerline-symbols
+      jetbrains-mono
+    ];
     };
+
     userConfig = {pkgs, config, ...}:
     let
       dotfilesDir = "${config.home.homeDirectory}/.dotfiles";
@@ -90,12 +101,22 @@
         pinentry.package = pkgs.pinentry_mac;
       };
 
+      programs.neovim = {
+        enable = true;
+        defaultEditor = true;
+      };
+
       home.file = {
         ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/zsh/zshrc";
         ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/zsh/zshenv";
+        ".zprofile".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/zsh/zprofile";
+        ".vimrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/vim/vimrc";
         ".aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/mac/aerospace.toml";
       };
-        
+
+      xdg.configFile = {
+      	"nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/nvim";
+      };
     };
   in
   {
