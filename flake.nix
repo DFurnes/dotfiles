@@ -93,6 +93,7 @@
       home.file = {
         ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/zsh/zshrc";
         ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/zsh/zshenv";
+        ".aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/mac/aerospace.toml";
       };
         
     };
