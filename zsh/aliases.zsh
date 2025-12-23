@@ -6,6 +6,12 @@ if [ -x "$(command -v bat)" ]; then
   alias cat="bat"
 fi
 
+function yt-mp3() {
+  yt-dlp -x --audio-format mp3 "$@"
+}
+
+alias rebuild="~/.dotfiles/rebuild"
+
 # Clear screen and scroll-back, with a fun function name. :)
 # <http://apple.stackexchange.com/a/113168>
 function ✧() {

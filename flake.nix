@@ -1,0 +1,116 @@
+{
+  description = "Example nix-darwin system flake";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
+
+    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  outputs = inputs@{ self, home-manager, nix-darwin, nixpkgs }:
+  let
+    configuration = { pkgs, ... }: {
+      system.primaryUser = "dfurnes";
+
+      # List packages installed in system profile. To search by name, run:
+      # $ nix-env -qaP | grep wget
+      environment.systemPackages = with pkgs; [
+        fzf
+        git
+        gnupg
+        hub
+        jq
+        nodenv
+        pinentry_mac
+        silver-searcher
+        squashfsTools
+        starship 
+        yt-dlp
+      ];
+
+      # Enable Touch ID for 'sudo':
+      security.pam.services.sudo_local.touchIdAuth = true;
+      security.pam.services.sudo_local.reattach = true;
+
+      # Necessary for using flakes on this system.
+      nix.settings.experimental-features = "nix-command flakes";
+
+      users.users.dfurnes = {
+        home = "/Users/dfurnes";
+      };
+
+      # Determinate uses its own daemon to manage the Nix installation that
+      # conflicts with nix-darwin’s native Nix management:
+      nix.enable = false;
+
+      # Set Git commit hash for darwin-version.
+      system.configurationRevision = self.rev or self.dirtyRev or null;
+
+      # macOS defaults:
+      system.defaults = {
+        dock.autohide = true;
+        dock.mru-spaces = false;
+
+        finder.FXPreferredViewStyle = "clmv"; # columns
+        finder.ShowExternalHardDrivesOnDesktop = true;
+        finder.ShowRemovableMediaOnDesktop = true;
+
+        WindowManager.EnableStandardClickToShowDesktop = false;
+
+        NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
+      };
+
+      # Used for backwards compatibility, please read the changelog before changing.
+      # $ darwin-rebuild changelog
+      system.stateVersion = 6;
+
+      # The platform the configuration will be used on.
+      nixpkgs.hostPlatform = "aarch64-darwin";
+
+      # Allow non-free packages, like Claude Code:
+      nixpkgs.config.allowUnfree = true;
+    };
+    userConfig = {pkgs, config, ...}:
+    let
+      dotfilesDir = "${config.home.homeDirectory}/.dotfiles";
+    in
+    {
+      home.stateVersion = "23.05";
+      programs.home-manager.enable = true;
+
+      services.gpg-agent = {
+        enable = true;
+
+        # Connects gpg-agent to the nix-managed pinentry, allowing the
+        # gpg key's passphrase to be stored in the login keychain:
+        pinentry.package = pkgs.pinentry_mac;
+      };
+
+      home.file = {
+        ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/zsh/zshrc";
+        ".zshenv".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/zsh/zshenv";
+      };
+        
+    };
+  in
+  {
+    # Build darwin flake using:
+    # $ darwin-rebuild build --flake .#Davids-MacBook-Air-2
+    darwinConfigurations."Davids-MacBook-Air" = nix-darwin.lib.darwinSystem {
+      modules = [
+        configuration
+
+        home-manager.darwinModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.dfurnes = userConfig;
+        }
+      ];
+
+    };
+  };
+}

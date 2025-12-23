@@ -30,14 +30,6 @@ cdpath=(
   $cdpath
 )
 
-# Set the list of directories that Zsh searches for programs.
-path=(
-	/usr/local/{bin,sbin}
-	/{bin,sbin}
-	/usr/{bin,sbin}
-	$path
-)
-
 # Allow Ctrl-S to be used as binding
 stty -ixon
 
