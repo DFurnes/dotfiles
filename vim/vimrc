@@ -32,8 +32,9 @@ set scrolloff=5
 set noerrorbells
 set novisualbell
 
-" show powerline all the time
+" show powerline all the time & hide duplicate mode
 set laststatus=2
+set noshowmode
 
 " gui options
 set guifont=Menlo:h12
@@ -45,27 +46,6 @@ set guioptions-=e
 " hide splash screen
 set shortmess+=I
 
-set noshowmode
-" Airline
-" let g:airline_theme='one'
-" let g:airline_powerline_fonts = 0
-" let g:airline_symbols = {}
-" let g:airline_left_sep = ''
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_symbols.linenr = '' " ¶
-" let g:airline_symbols.maxlinenr = ''  " ln
-" let g:airline_symbols.branch = '⎇'
-" let g:airline_symbols.paste = 'P'
-" let g:airline_symbols.whitespace = 'Ξ'
-
-" let g:airline_section_x='' " hide tagbar, filetype, virtualenv
-" let g:airline_section_y='' " hide fileencoding, fileformat
-
-" let g:airline#extensions#ale#enabled = 1
-" let g:airline#extensions#ale#warning_symbol = '▲'
-" let g:airline#extensions#ale#error_symbol = '✗'
 
 " Ale
 let g:ale_sign_warning = '▲'

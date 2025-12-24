@@ -1,5 +1,5 @@
 {
-  description = "Example nix-darwin system flake";
+  description = "Base system configuration & dotfiles.";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
@@ -76,13 +76,11 @@
       # Allow non-free packages, like Claude Code:
       nixpkgs.config.allowUnfree = true;
 
-    fonts.packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.symbols-only
-      # powerline-fonts
-      # powerline-symbols
-      jetbrains-mono
-    ];
+      fonts.packages = with pkgs; [
+        nerd-fonts.jetbrains-mono
+        nerd-fonts.symbols-only
+        jetbrains-mono
+      ];
     };
 
     userConfig = {pkgs, config, ...}:
@@ -120,8 +118,6 @@
     };
   in
   {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Davids-MacBook-Air-2
     darwinConfigurations."Davids-MacBook-Air" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
@@ -132,7 +128,6 @@
           home-manager.users.dfurnes = userConfig;
         }
       ];
-
     };
   };
 }

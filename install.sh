@@ -12,9 +12,6 @@ ln -sf $DOTFILES_DIRECTORY/zsh/zshenv $HOME/.zshenv
 ln -hsF $DOTFILES_DIRECTORY/vim $HOME/.vim
 ln -sf $DOTFILES_DIRECTORY/vim/vimrc $HOME/.vimrc
 
-ln -hsF $DOTFILES_DIRECTORY/yabai $HOME/.config/yabai
-ln -hsF $DOTFILES_DIRECTORY/skhd $HOME/.config/skhd
-
 # Set up Vim directories:
 mkdir ~/.vim/backups
 mkdir ~/.vim/undodir
