@@ -11,6 +11,7 @@ ln -sf $DOTFILES_DIRECTORY/zsh/zshenv $HOME/.zshenv
 
 ln -hsF $DOTFILES_DIRECTORY/vim $HOME/.vim
 ln -sf $DOTFILES_DIRECTORY/vim/vimrc $HOME/.vimrc
+ln -s ~/.dotfiles/nvim ~/.config/nvim
 
 # Set up Vim directories:
 mkdir ~/.vim/backups
