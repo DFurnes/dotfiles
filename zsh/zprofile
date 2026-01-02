@@ -24,12 +24,14 @@ export PAGER='less'
 export LESS='-i -R -w -F'
 
 # Paths
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
+path=(
+  $HOME/bin
+  $path
+)
 
 # Set the the list of directories that cd searches.
 cdpath=(
-  $HOME/Sites 
+  $HOME/Sites
   $HOME/Developer
   $cdpath
 )
@@ -40,3 +42,6 @@ stty -ixon
 if [ -f "$HOME/.zprofile.local" ]; then
   source $HOME/.zprofile.local
 fi
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
