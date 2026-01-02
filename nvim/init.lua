@@ -2,8 +2,14 @@
 require("lazy_bootstrap")
 require("plugins")
 
+-- Close after auto-installing plugins
+if vim.o.filetype == "lazy" then
+  vim.cmd.close()
+end
+
+-- Configure status line
 require('lualine').setup({
-  options = { 
+  options = {
     theme = 'onelight',
     component_separators = { left = ' ', right = ' ' },
     section_separators = { left = '', right = ' ' },
