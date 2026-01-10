@@ -22,24 +22,37 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
-        # aerospace
-        doctl
-        fzf
-        git
+
+        # git/gpg:
         gnupg
         hub
+        pinentry_mac
+
+        # virtual machines
+        orbstack
+        vfkit
+
+        # shell/editor:
+        fzf
+        git
         jq
         neovim
-        nix-prefetch-github
-        nodenv
-        orbstack
-        pinentry_mac
         silver-searcher
+        starship
+
+        # utility
+        doctl
         squashfsTools
-        starship 
-        vfkit
         wget
         yt-dlp
+
+        # languages
+        nodenv
+        rustc
+        cargo
+
+        # nix
+        nix-prefetch-github
 
         # unstable:
         pkgsUnstable.aerospace
@@ -113,6 +126,14 @@
       programs.neovim = {
         enable = true;
         defaultEditor = true;
+      };
+
+      programs.git = {
+          enable = true;
+          settings = {
+            user.name = "David Furnes";
+            user.email = "david@dfurnes.com";
+          };
       };
 
       home.file = {
