@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -11,14 +12,18 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, home-manager, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, home-manager, nix-darwin, nixpkgs, nixpkgs-unstable }:
   let
+    system = "aarch64-darwin";
+    pkgsUnstable = import nixpkgs-unstable { inherit system; };
     configuration = { pkgs, ... }: {
       system.primaryUser = "dfurnes";
 
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
+        # aerospace
+        doctl
         fzf
         git
         gnupg
@@ -27,11 +32,17 @@
         neovim
         nix-prefetch-github
         nodenv
+        orbstack
         pinentry_mac
         silver-searcher
         squashfsTools
         starship 
+        vfkit
+        wget
         yt-dlp
+
+        # unstable:
+        pkgsUnstable.aerospace
       ];
 
       # Enable Touch ID for 'sudo':
