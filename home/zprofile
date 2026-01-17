@@ -26,6 +26,7 @@ export LESS='-i -R -w -F'
 # Paths
 path=(
   $HOME/bin
+  $HOME/.npm-packages/bin
   $path
 )
 

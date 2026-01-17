@@ -21,6 +21,7 @@
         yt-dlp
 
         # languages
+        nodejs
         nodenv
         rustc
         cargo

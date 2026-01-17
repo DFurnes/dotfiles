@@ -24,4 +24,5 @@ require('lualine').setup({
   },
 })
 
-vim.cmd("source ~/.dotfiles/nvim/vimrc")
+local config = vim.fn.stdpath("config")
+vim.cmd("source " .. config .. "/vimrc")

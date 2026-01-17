@@ -15,11 +15,12 @@
     in
     {
       home.stateVersion = "23.05";
+
       programs.home-manager.enable = true;
 
       services.gpg-agent = {
         enable = true;
-        pinentry.package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry;
+        pinentry.package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-gnome3;
       };
 
       programs.neovim = {
@@ -36,15 +37,20 @@
       };
 
       home.file = {
-        ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/home/zshrc";
-        ".zprofile".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/home/zprofile";
+        ".zshrc".source = ./zshrc;
+        ".zprofile".source = ./zprofile;
+	".npmrc" = {
+	  text = "prefix = ~/.npm-packages";
+        };
       } // (if pkgs.stdenv.isDarwin then {
         ".aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/mac/aerospace.toml";
-      } else {});
+      } else {
+        ".dotfiles".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos";
+      });
 
       xdg.configFile = {
-        "nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/nvim";
-        "starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/home/starship.toml";
+        "nvim".source = ../nvim;
+        "starship.toml".source = ./starship.toml;
       };
     };
   in

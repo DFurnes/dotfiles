@@ -6,6 +6,9 @@ scriptencoding utf-8
 syntax enable
 colorscheme one
 set background=light
+" hi Normal ctermbg=NONE
+" hi NonText ctermbg=NONE
+" hi EndOfBuffer ctermbg=NONE
 
 set nofoldenable
 
