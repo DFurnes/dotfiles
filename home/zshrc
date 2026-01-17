@@ -30,16 +30,16 @@ if [ -n "${commands[fzf-share]}" ]; then
 fi
 
 # Load aliases & bindings:
-source "$HOME/.dotfiles/zsh/bindings.zsh"
-source "$HOME/.dotfiles/zsh/aliases.zsh"
+source "$HOME/.dotfiles/home/bindings.zsh"
+source "$HOME/.dotfiles/home/aliases.zsh"
 
 # Source bash aliases if they exist:
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
 # Quick edit:
-function zshrc() { vi $HOME/.dotfiles/zsh/zshrc && source ~/.zshrc }
-function aliases() { vi $HOME/.dotfiles/zsh/aliases.zsh && source ~/.zshrc }
-function bindings() { vi $HOME/.dotfiles/zsh/bindings.zsh && source ~/.zshrc }
+function zshrc() { vi $HOME/.dotfiles/home/zshrc && source ~/.zshrc }
+function aliases() { vi $HOME/.dotfiles/home/aliases.zsh && source ~/.zshrc }
+function bindings() { vi $HOME/.dotfiles/home/bindings.zsh && source ~/.zshrc }
 
 # Starship prompt <https://starship.rs>:
 eval "$(starship init zsh)"

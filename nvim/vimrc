@@ -228,6 +228,7 @@ set smartindent
 set nocindent
 
 " custom syntax highlighting:
+au BufNewFile,BufRead *.bu,*.fcc set filetype=yaml
 au BufNewFile,BufRead *.env.example set ft=sh
 au BufNewFile,BufRead Brewfile set ft=sh
 
