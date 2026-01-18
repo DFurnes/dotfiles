@@ -93,6 +93,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     _1password-gui
+    gnomeExtensions.appindicator
+    gnomeExtensions.vitals
     vim
     binutils
     efibootmgr

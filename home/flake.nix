@@ -57,6 +57,16 @@
         "nvim".source = ../nvim;
         "starship.toml".source = ./starship.toml;
       };
+
+      dconf.settings = {
+        "org/gnome/shell" = {
+          disable-user-extensions = false;
+          enabled-extensions = [
+            "appindicatorsupport@rgcjonas.gmail.com"
+            "Vitals@CoreCoding.com"
+          ];
+        };
+      };
     };
   in
   {
