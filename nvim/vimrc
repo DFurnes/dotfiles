@@ -4,11 +4,7 @@ scriptencoding utf-8
 " Appearance & color scheme
 " -------------------------
 syntax enable
-colorscheme one
-set background=light
-" hi Normal ctermbg=NONE
-" hi NonText ctermbg=NONE
-" hi EndOfBuffer ctermbg=NONE
+colorscheme edge
 
 set nofoldenable
 

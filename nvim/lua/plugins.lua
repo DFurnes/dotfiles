@@ -17,7 +17,7 @@ require("lazy").setup({
   {'pangloss/vim-javascript'}, --  adds updates not included in vim-polyglot
   {'plasticboy/vim-markdown'}, --  adds updates not included in vim-polyglot
   {'prettier/vim-prettier'},
-  {'rakr/vim-one'}, --  color scheme
+  {'sainnhe/edge'}, -- color scheme
   {'reedes/vim-pencil'}, --  markdown
   {'scrooloose/nerdtree'}, --  tree view
   -- {'sheerun/vim-polyglot'}, --  syntax highlighting
