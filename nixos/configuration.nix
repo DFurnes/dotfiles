@@ -21,6 +21,10 @@
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.timeout = 0;
 
+  # Graphics:
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
+
   # Networking:
   networking.hostName = "desktop";
   networking.networkmanager.enable = true;
@@ -88,12 +92,19 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    _1password-gui
     vim
     binutils
     efibootmgr
     tcpdump
     unzip
   ];
+
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "dfurnes" ];
+  };
 
   # List services that you want to enable:
   programs.npm.enable = true;
