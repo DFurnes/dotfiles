@@ -119,6 +119,7 @@
   # programs.gnupg.agent = {
   #   enable = true;
   #   enableSSHSupport = true;
+  #   pinentryPackage = pkgs.pinentry-gnome3;
   # };
 
   # List services that you want to enable:
@@ -127,24 +128,17 @@
     prefix = ''${HOME}/.npm
   '';
 
-  # GNOME Keyring causes SSH to hang occasionally:
-  # services.gnome.gcr-ssh-agent.enable = false;
-  # programs.ssh.startAgent = true;
-  # programs.seahorse.enable = true;
+  # Use GNOME Keyring for secrets, but NOT as the SSH agent.
   # services.gnome.gnome-keyring.enable = true;
-  # security.pam.services = {
-  #   greetd.enableGnomeKeyring = true;
-  #   greetd-password.enableGnomeKeyring = true;
-  #   login.enableGnomeKeyring = true;
-  # };
+  # services.gnome.gcr-ssh-agent.enable = false;
+  # programs.seahorse.enable = true;
   # services.dbus.packages = [ pkgs.gnome-keyring pkgs.gcr ];
 
   # Make PAM unlock/start the keyring on login (GDM)
   # security.pam.services.gdm.enableGnomeKeyring = true;
   # security.pam.services.gdm-password.enableGnomeKeyring = true;
 
-  # Don’t run competing agents
-  # services.gnome.gcr-ssh-agent.enable = false;
+  # Don’t run a competing OpenSSH agent
   # programs.ssh.startAgent = false;
 
   # Enable the OpenSSH daemon.
