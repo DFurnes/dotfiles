@@ -100,20 +100,17 @@
   # Install firefox.
   programs.firefox.enable = true;
 
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    neovim
-    git
+    vim
     binutils
     efibootmgr
+    tcpdump
     unzip
-    wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -130,6 +127,26 @@
     prefix = ''${HOME}/.npm
   '';
 
+  # GNOME Keyring causes SSH to hang occasionally:
+  # services.gnome.gcr-ssh-agent.enable = false;
+  # programs.ssh.startAgent = true;
+  # programs.seahorse.enable = true;
+  # services.gnome.gnome-keyring.enable = true;
+  # security.pam.services = {
+  #   greetd.enableGnomeKeyring = true;
+  #   greetd-password.enableGnomeKeyring = true;
+  #   login.enableGnomeKeyring = true;
+  # };
+  # services.dbus.packages = [ pkgs.gnome-keyring pkgs.gcr ];
+
+  # Make PAM unlock/start the keyring on login (GDM)
+  # security.pam.services.gdm.enableGnomeKeyring = true;
+  # security.pam.services.gdm-password.enableGnomeKeyring = true;
+
+  # Don’t run competing agents
+  # services.gnome.gcr-ssh-agent.enable = false;
+  # programs.ssh.startAgent = false;
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
   services.openssh.enable = true;
@@ -140,10 +157,6 @@
   };
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   # Avahi:
