@@ -8,11 +8,12 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.follows = "home-manager";
+    home-maanger.follows = "home-manager";
 
     home = {
       url = "path:../home";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
   };
 

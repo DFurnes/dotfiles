@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -20,6 +20,45 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.timeout = 0;
+
+  # Persistence:
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    DEV=/dev/disk/by-label/nixos
+    mkdir -p /run/vol /run/persist
+
+    # Mount top-level volume to manipulate snapshots, and the
+    # '@persist' subvol to check for the '.reset-system' marker:
+    mount -t btrfs -o subvol=/ "$DEV" /run/vol
+    mount -t btrfs -o ro,subvol=@persist "$DEV" /run/persist
+
+    if [ -f /run/persist/.reset-system ]; then
+      echo "Resetting @root from @root-blank"
+
+      # Delete nested subvolumes under @root first
+      btrfs subvolume list -o /run/vol/@root | cut -f9 -d' ' | while read -r sv; do
+        btrfs subvolume delete "/run/vol/$sv"
+      done
+
+      # Replace @root
+      btrfs subvolume delete /run/vol/@root
+      btrfs subvolume snapshot /run/vol/@root-blank /run/vol/@root
+    else
+      echo "Leaving @root unchanged"
+    fi
+
+    umount /run/persist
+    umount /run/vol
+  '';
+
+  environment.persistence."/persist" = {
+    directories = [
+      "/var/db" # Databases, sudo lecture, etc.
+      "/var/lib" # Application & package manager state
+      "/etc/nixos" # NixOS configuration
+      "/home/dfurnes" # Home directory
+      "/etc/NetworkManager/system-connections" # WiFi networks
+    ];
+  };
 
   # Graphics:
   hardware.graphics.enable = true;
@@ -68,11 +107,16 @@
     pulse.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Disable password login for root user:
+  users.users.root.hashedPassword = "!";
+
+  # User accounts:
+  users.mutableUsers = false;
   users.users.dfurnes = {
     isNormalUser = true;
     description = "David Furnes";
     extraGroups = [ "networkmanager" "wheel" ];
+    hashedPasswordFile = "/persist/secrets/dfurnes.hash";
     shell = pkgs.zsh; 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPT03WzkjZo7eQlGCgP+kuvs3f4A/s6MoEbITrIChOv+ david@dfurnes.com"

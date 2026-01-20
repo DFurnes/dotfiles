@@ -4,16 +4,20 @@
   inputs = {
     nixpkgs.follows = "nixpkgs";
     nixpkgs-unstable.follows = "nixpkgs-unstable";
-
     home-manager.follows = "home-manager";
+
+    impermanence.url = "github:nix-community/impermanence";
+    impermanence.inputs.nixpkgs.follows = "";
+    impermanence.inputs.home-manager.follows = "";
 
     home = {
       url = "path:../home";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
   };
 
-  outputs = inputs@{ self, home-manager, nixpkgs, nixpkgs-unstable, home }:
+  outputs = inputs@{ self, home-manager, nixpkgs, nixpkgs-unstable, home, impermanence }:
   let
     mkNixosSystem = { system, modules }:
       nixpkgs.lib.nixosSystem {
@@ -25,6 +29,7 @@
        desktop = mkNixosSystem {
          system = "x86_64-linux";
          modules = [
+           impermanence.nixosModules.impermanence
            ./hardware-configuration.nix
            ./configuration.nix
            ({ pkgs, ... }: {
