@@ -31,7 +31,17 @@
          modules = [
            impermanence.nixosModules.impermanence
            ./hardware-configuration.nix
-           ./configuration.nix
+
+           # Configuration:
+           ./bootloader.nix
+           ./desktop.nix
+           ./devices.nix
+           ./nixos.nix
+           ./packages.nix
+           ./persistence.nix
+           ./services.nix
+           ./users.nix
+
            ({ pkgs, ... }: {
              # ...
            })
