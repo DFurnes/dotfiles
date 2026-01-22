@@ -9,6 +9,7 @@
         fzf
         git
         jq
+        vim
         neovim
         silver-searcher
         starship
@@ -19,6 +20,7 @@
         wget
         tree
         yt-dlp
+        unzip
 
         # languages
         nodejs
@@ -30,4 +32,10 @@
         # nix
         nix-prefetch-github
   ];
+
+  # Allow mutable npm global installs:
+  programs.npm.enable = true;
+  programs.npm.npmrc = ''
+    prefix = ''${HOME}/.npm
+  '';
 }

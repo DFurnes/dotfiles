@@ -3,25 +3,21 @@
     "home": {
       "inputs": {
         "home-manager": [
-          "macos",
           "home-manager"
         ],
         "nixpkgs": [
-          "macos",
           "nixpkgs"
         ]
       },
       "locked": {
-        "path": "../home",
+        "path": "./home",
         "type": "path"
       },
       "original": {
-        "path": "../home",
+        "path": "./home",
         "type": "path"
       },
-      "parent": [
-        "macos"
-      ]
+      "parent": []
     },
     "home-manager": {
       "inputs": {
@@ -44,44 +40,17 @@
         "type": "github"
       }
     },
-    "home_2": {
-      "inputs": {
-        "home-manager": [
-          "nixos",
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixos",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "path": "../home",
-        "type": "path"
-      },
-      "original": {
-        "path": "../home",
-        "type": "path"
-      },
-      "parent": [
-        "nixos"
-      ]
-    },
     "impermanence": {
       "inputs": {
-        "home-manager": [
-          "nixos"
-        ],
-        "nixpkgs": [
-          "nixos"
-        ]
+        "home-manager": [],
+        "nixpkgs": []
       },
       "locked": {
-        "lastModified": 1768835187,
-        "narHash": "sha256-6nY0ixjGjPQCL+/sUC1B1MRiO1LOI3AkRSIywm3i3bE=",
+        "lastModified": 1768941735,
+        "narHash": "sha256-OyxsfXNcOkt06/kM+4bnuC8moDx+t7Qr+RB0BBa83Ig=",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "0d633a69480bb3a3e2f18c080d34a8fa81da6395",
+        "rev": "69ecf31e8fddc9354a4b418f3a517445d486bb54",
         "type": "github"
       },
       "original": {
@@ -90,38 +59,9 @@
         "type": "github"
       }
     },
-    "macos": {
-      "inputs": {
-        "home": "home",
-        "home-maanger": [
-          "macos",
-          "home-manager"
-        ],
-        "home-manager": [
-          "home-manager"
-        ],
-        "nix-darwin": "nix-darwin",
-        "nixpkgs": [
-          "nixpkgs-darwin"
-        ],
-        "nixpkgs-unstable": [
-          "nixpkgs-unstable"
-        ]
-      },
-      "locked": {
-        "path": "./macos",
-        "type": "path"
-      },
-      "original": {
-        "path": "./macos",
-        "type": "path"
-      },
-      "parent": []
-    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
-          "macos",
           "nixpkgs"
         ]
       },
@@ -139,30 +79,6 @@
         "repo": "nix-darwin",
         "type": "github"
       }
-    },
-    "nixos": {
-      "inputs": {
-        "home": "home_2",
-        "home-manager": [
-          "home-manager"
-        ],
-        "impermanence": "impermanence",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nixpkgs-unstable": [
-          "nixpkgs-unstable"
-        ]
-      },
-      "locked": {
-        "path": "./nixos",
-        "type": "path"
-      },
-      "original": {
-        "path": "./nixos",
-        "type": "path"
-      },
-      "parent": []
     },
     "nixpkgs": {
       "locked": {
@@ -214,9 +130,10 @@
     },
     "root": {
       "inputs": {
+        "home": "home",
         "home-manager": "home-manager",
-        "macos": "macos",
-        "nixos": "nixos",
+        "impermanence": "impermanence",
+        "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "nixpkgs-darwin": "nixpkgs-darwin",
         "nixpkgs-unstable": "nixpkgs-unstable"
