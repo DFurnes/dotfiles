@@ -4,6 +4,8 @@ scriptencoding utf-8
 " Appearance & color scheme
 " -------------------------
 syntax enable
+
+let g:edge_transparent_background=1
 colorscheme edge
 
 set nofoldenable
