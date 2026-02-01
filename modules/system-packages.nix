@@ -12,6 +12,7 @@
         vim
         neovim
         silver-searcher
+        ripgrep
         starship
 
         # utility
