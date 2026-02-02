@@ -34,33 +34,33 @@
   };
 
   # Reset system to "fresh" state with '/persist/.reset-system':
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    DEV=/dev/disk/by-label/nixos
-    mkdir -p /run/vol /run/persist
+  # boot.initrd.postDeviceCommands = lib.mkAfter ''
+  #   DEV=/dev/disk/by-label/nixos
+  #   mkdir -p /run/vol /run/persist
 
-    # Mount top-level volume to manipulate snapshots, and the
-    # '@persist' subvol to check for the '.reset-system' marker:
-    mount -t btrfs -o subvol=/ "$DEV" /run/vol
-    mount -t btrfs -o ro,subvol=@persist "$DEV" /run/persist
+  #   # Mount top-level volume to manipulate snapshots, and the
+  #   # '@persist' subvol to check for the '.reset-system' marker:
+  #   mount -t btrfs -o subvol=/ "$DEV" /run/vol
+  #   mount -t btrfs -o ro,subvol=@persist "$DEV" /run/persist
 
-    if [ -f /run/persist/.reset-system ]; then
-      echo "Resetting @root from @root-blank"
+  #   if [ -f /run/persist/.reset-system ]; then
+  #     echo "Resetting @root from @root-blank"
 
-      # Delete nested subvolumes under @root first
-      btrfs subvolume list -o /run/vol/@root | cut -f9 -d' ' | while read -r sv; do
-        btrfs subvolume delete "/run/vol/$sv"
-      done
+  #     # Delete nested subvolumes under @root first
+  #     btrfs subvolume list -o /run/vol/@root | cut -f9 -d' ' | while read -r sv; do
+  #       btrfs subvolume delete "/run/vol/$sv"
+  #     done
 
-      # Replace @root
-      btrfs subvolume delete /run/vol/@root
-      btrfs subvolume snapshot /run/vol/@root-blank /run/vol/@root
-    else
-      echo "Leaving @root unchanged"
-    fi
+  #     # Replace @root
+  #     btrfs subvolume delete /run/vol/@root
+  #     btrfs subvolume snapshot /run/vol/@root-blank /run/vol/@root
+  #   else
+  #     echo "Leaving @root unchanged"
+  #   fi
 
-    umount /run/persist
-    umount /run/vol
-  '';
+  #   umount /run/persist
+  #   umount /run/vol
+  # '';
 
   # The folllowing directories will be persisted:
   environment.persistence."/persist" = {
@@ -75,10 +75,14 @@
 
   # Bootloader:
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 10;
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0; # hold 'space' to show menu.
 
+  # Plymouth:
+  boot.plymouth.enable = true;
+  boot.plymouth.theme = "spinner";
+  boot.initrd.systemd.enable = true;
   # Desktop environment:
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
