@@ -10,15 +10,33 @@
     ../../modules/system-packages.nix
   ];
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      dropbox-cli = prev.dropbox-cli // {
+        nautilusExtension =
+          prev.dropbox-cli.nautilusExtension.overrideAttrs (_old: {
+            configureFlags = [
+              "--with-nautilus-extension-dir=${placeholder "nautilusExtension"}/lib/nautilus/extensions-4"
+            ];
+          });
+      };
+    })
+  ];
+
+
   # To search: `$ nix search wget`
   environment.systemPackages = with pkgs; [
     _1password-gui
+    dropbox-cli
+    dropbox-cli.nautilusExtension
     gnomeExtensions.appindicator
     gnomeExtensions.vitals
     binutils
     efibootmgr
     tcpdump
   ];
+
+  environment.extraOutputsToInstall = [ "nautilusExtension" ];
 
   # Flatpak:
   services.flatpak.enable = true;
@@ -124,8 +142,28 @@
     publish.userServices = true;
   };
 
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  # Dropbox
+  systemd.user.services.dropbox = {
+    description = "Dropbox";
+    wantedBy = [ "graphical-session.target" ];
+    environment = {
+      QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
+      QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
+    };
+    serviceConfig = {
+      ExecStart = "${lib.getBin pkgs.dropbox}/bin/dropbox";
+      ExecReload = "${lib.getBin pkgs.coreutils}/bin/kill -HUP $MAINPID";
+      KillMode = "control-group"; # upstream recommends process
+      Restart = "on-failure";
+      PrivateTmp = true;
+      ProtectSystem = "full";
+      Nice = 10;
+    };
+  };
+
+  # Open ports in the firewall for SSH & Dropbox.
+  networking.firewall.allowedTCPPorts = [ 22 17500 ];
+  networking.firewall.allowedUDPPorts = [ 17500 ];
 
   # Graphics:
   hardware.graphics.enable = true;
