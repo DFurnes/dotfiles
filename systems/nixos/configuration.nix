@@ -51,6 +51,12 @@
     polkitPolicyOwners = [ "dfurnes" ];
   };
 
+  # Automatic updates:
+  system.autoUpgrade = {
+    enable = true;
+    flake = "/etc/nixos";
+  };
+
   # Reset system to "fresh" state with '/persist/.reset-system':
   # boot.initrd.postDeviceCommands = lib.mkAfter ''
   #   DEV=/dev/disk/by-label/nixos
