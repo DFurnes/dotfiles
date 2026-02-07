@@ -9,7 +9,7 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager }:
   let
-    userConfig = {pkgs, config, ...}:
+    userConfig = {pkgs, config, lib, ...}:
     let
       dotfilesDir = "${config.home.homeDirectory}/.dotfiles";
     in
@@ -18,14 +18,19 @@
 
       programs.home-manager.enable = true;
 
-      home.packages = [
+      home.packages = lib.optionals pkgs.stdenv.isLinux [
         pkgs.gcr
       ];
 
-      services.gpg-agent = {
+      services.gpg-agent = lib.mkIf pkgs.stdenv.isDarwin {
         enable = true;
         enableSshSupport = true;
-        pinentry.package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-gnome3;
+        pinentry.package = pkgs.pinentry_mac;
+      };
+
+      services.gnome-keyring = lib.mkIf pkgs.stdenv.isLinux {
+        enable = true;
+        components = [ "pkcs11" "secrets" "ssh" ];
       };
 
       programs.neovim = {

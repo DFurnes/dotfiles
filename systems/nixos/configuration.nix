@@ -107,10 +107,15 @@
   boot.plymouth.enable = true;
   boot.plymouth.theme = "spinner";
   boot.initrd.systemd.enable = true;
+
   # Desktop environment:
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+
+  # GNOME Keyring:
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   # User accounts:
   users.mutableUsers = false;
