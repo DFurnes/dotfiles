@@ -69,6 +69,7 @@
           enabled-extensions = [
             "appindicatorsupport@rgcjonas.gmail.com"
             "Vitals@CoreCoding.com"
+            "forge@jmmaranan.com"
           ];
         };
       };
