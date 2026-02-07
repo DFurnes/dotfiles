@@ -57,6 +57,12 @@
     flake = "/etc/nixos";
   };
 
+  # Use 'systemd-resolved' for DNS, which works around
+  # an issue where legacy 'resolv.conf' isn't ready yet
+  # when 'autoUpgrade' runs:
+  services.resolved.enable = true;
+  networking.networkmanager.dns = "systemd-resolved";
+
   # Reset system to "fresh" state with '/persist/.reset-system':
   # boot.initrd.postDeviceCommands = lib.mkAfter ''
   #   DEV=/dev/disk/by-label/nixos
