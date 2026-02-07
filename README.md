@@ -1,4 +1,1 @@
-dotfiles by dfurnes
-=======================
-
-My configuration files for Zsh, Vim, and macOS.
+<br><br><br><p align="center">❄️</p><br><br><br>
