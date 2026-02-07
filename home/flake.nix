@@ -105,13 +105,13 @@
           move-to-workspace-6 = [ "<Shift><Super>6" ];
         };
 
-        "org/gnome/mutter" = {
-          dynamic-workspaces = false;
-        };
+        # "org/gnome/mutter" = {
+        #   dynamic-workspaces = false;
+        # };
 
-        "org/gnome/desktop/wm/preferences" = {
-          num-workspaces = 6;
-        };
+        # "org/gnome/desktop/wm/preferences" = {
+        #   num-workspaces = 6;
+        # };
 
         "org/gnome/shell/extensions/forge" = {
           window-gap-size = 8;
