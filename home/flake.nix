@@ -112,6 +112,27 @@
         "org/gnome/desktop/wm/preferences" = {
           num-workspaces = 6;
         };
+
+        "org/gnome/shell/extensions/forge" = {
+          window-gap-size = 8;
+        };
+
+        "org/gnome/shell/extensions/forge/keybindings" = {
+          window-focus-left = [ "<Super>h" ];
+          window-focus-down = [ "<Super>j" ];
+          window-focus-up = [ "<Super>k" ];
+          window-focus-right = [ "<Super>l" ];
+
+          window-move-left = [ "<Shift><Super>h" ];
+          window-move-down = [ "<Shift><Super>j" ];
+          window-move-up = [ "<Shift><Super>k" ];
+          window-move-right = [ "<Shift><Super>l" ];
+
+          con-split-layout-toggle = [ "<Super>slash" ];
+          con-stacked-layout-toggle = [ "<Super>comma" ];
+
+          window-toggle-float = [ "<Super>f" ];
+        };
       };
     };
     in
