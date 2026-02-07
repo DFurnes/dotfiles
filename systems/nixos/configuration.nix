@@ -211,6 +211,11 @@
     variant = "";
   };
 
+  # Prevent Logitech mouse receiver from preventing sleep:
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c548", ATTR{power/wakeup}="disabled"
+  '';
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
