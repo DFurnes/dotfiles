@@ -105,13 +105,10 @@
           move-to-workspace-6 = [ "<Shift><Super>6" ];
         };
 
-        # "org/gnome/mutter" = {
-        #   dynamic-workspaces = false;
-        # };
-
-        # "org/gnome/desktop/wm/preferences" = {
-        #   num-workspaces = 6;
-        # };
+        "org/gnome/mutter" = {
+          # Steam games can be marked "unresponsive" w/ the default timeout:
+          check-alive-timeout = lib.gvariant.mkUint32 15000;
+        };
 
         "org/gnome/shell/extensions/forge" = {
           window-gap-size = 8;
