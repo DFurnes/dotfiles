@@ -56,6 +56,7 @@
         ".aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/mac/aerospace.toml";
       } else {
         ".dotfiles".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos";
+        ".mozilla/firefox".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/mozilla/firefox";
       });
 
       xdg.configFile = {
@@ -67,9 +68,12 @@
         "org/gnome/shell" = {
           disable-user-extensions = false;
           enabled-extensions = [
-            "appindicatorsupport@rgcjonas.gmail.com"
             "Vitals@CoreCoding.com"
+            "appindicatorsupport@rgcjonas.gmail.com"
+            "caffeine@patapon.info"
             "forge@jmmaranan.com"
+            "lockkeys@vaina.lt"
+            "rounded-window-corners@fxgn"
           ];
         };
         
@@ -129,6 +133,10 @@
           con-stacked-layout-toggle = [ "<Super>comma" ];
 
           window-toggle-float = [ "<Super>f" ];
+        };
+
+        "org/gnome/shell/extensions/rounded-window-corners-reborn" = {
+          blacklist = ["steam_proton"];
         };
       };
     };
