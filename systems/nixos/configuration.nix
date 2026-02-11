@@ -57,6 +57,27 @@
     flake = "/etc/nixos";
   };
 
+  # Step 1: update flake.lock (optionally commit it)
+  systemd.services.flake-update = {
+    description = "Update flake inputs";
+    before = [ "nixos-upgrade.service" ];
+    requiredBy = [ "nixos-upgrade.service" ];
+
+    path = [ pkgs.nix ];
+    serviceConfig = {
+      Type = "oneshot";
+      WorkingDirectory = "/etc/nixos";
+
+      ExecStart = "${pkgs.nix}/bin/nix flake update --flake /etc/nixos";
+    };
+  };
+
+  # Step 2: make nixos-upgrade wait for flake-update
+  systemd.services.nixos-upgrade = {
+    after = [ "flake-update.service" ];
+    wants = [ "flake-update.service" ];
+  };
+
   # Use 'systemd-resolved' for DNS, which works around
   # an issue where legacy 'resolv.conf' isn't ready yet
   # when 'autoUpgrade' runs:
