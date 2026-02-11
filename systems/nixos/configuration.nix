@@ -63,7 +63,7 @@
     before = [ "nixos-upgrade.service" ];
     requiredBy = [ "nixos-upgrade.service" ];
 
-    path = [ pkgs.nix ];
+    path = [ pkgs.nix pkgs.git ];
     serviceConfig = {
       Type = "oneshot";
       WorkingDirectory = "/etc/nixos";
