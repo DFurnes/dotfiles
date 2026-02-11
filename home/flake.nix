@@ -136,7 +136,7 @@
         };
 
         "org/gnome/shell/extensions/rounded-window-corners-reborn" = {
-          blacklist = ["steam_proton"];
+          blacklist = ["steam_proton" "steamwebhelper"];
         };
       };
     };
