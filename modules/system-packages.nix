@@ -33,10 +33,4 @@
         # nix
         nix-prefetch-github
   ];
-
-  # Allow mutable npm global installs:
-  programs.npm.enable = true;
-  programs.npm.npmrc = ''
-    prefix = ''${HOME}/.npm
-  '';
 }

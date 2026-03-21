@@ -1,10 +1,10 @@
-{ pkgs, self, ... }:
+{ pkgs, pkgsUnstable, self, ... }:
 
 {
   imports = [
-    ../modules/defaults.nix
-    ../modules/system-packages.nix
-    ../modules/fonts.nix
+    ../../modules/defaults.nix
+    ../../modules/system-packages.nix
+    ../../modules/fonts.nix
   ];
 
   # To search: `nix-env -qaP | grep wget`

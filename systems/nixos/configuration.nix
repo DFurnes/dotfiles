@@ -41,6 +41,12 @@
   # Flatpak:
   services.flatpak.enable = true;
 
+  # Allow mutable npm global installs:
+  programs.npm.enable = true;
+  programs.npm.npmrc = ''
+    prefix = ''${HOME}/.npm
+  '';
+
   # System programs:
   programs.zsh.enable = true;
   programs.firefox.enable = true;
