@@ -49,6 +49,7 @@
       home.file = {
         ".zshrc".source = ./zshrc;
         ".zprofile".source = ./zprofile;
+        ".claude/CLAUDE.md".source = ./CLAUDE.md;
 	".npmrc" = {
 	  text = "prefix = ~/.npm-packages";
         };
