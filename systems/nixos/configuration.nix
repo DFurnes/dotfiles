@@ -34,6 +34,7 @@
     binutils
     efibootmgr
     tcpdump
+    nvd
   ];
 
   environment.extraOutputsToInstall = [ "nautilusExtension" ];
@@ -140,6 +141,9 @@
   boot.plymouth.enable = true;
   boot.plymouth.theme = "spinner";
   boot.initrd.systemd.enable = true;
+
+  # Linux kernel:
+  boot.kernelPackages = pkgs.linuxPackages_6_18; # updating from default LTS due to amdgpu bugs
 
   # Desktop environment:
   services.xserver.enable = true;
