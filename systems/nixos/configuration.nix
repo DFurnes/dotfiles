@@ -27,6 +27,7 @@
   # To search: `$ nix search wget`
   environment.systemPackages = with pkgs; [
     _1password-gui
+    claude-code
     dropbox-cli
     dropbox-cli.nautilusExtension
     gnomeExtensions.appindicator
@@ -144,6 +145,7 @@
 
   # Linux kernel:
   boot.kernelPackages = pkgs.linuxPackages_6_18; # updating from default LTS due to amdgpu bugs
+  boot.kernelParams = [ "amdgpu.gfxoff=0" ]; # SMU hangs when exiting gfxoff power state (RX 6700 XT)
 
   # Desktop environment:
   services.xserver.enable = true;
