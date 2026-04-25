@@ -25,8 +25,12 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nix-darwin, home-manager, home, impermanence, ... }:
   let
     mkNixosSystem = { system, modules }:
+      let
+        pkgsUnstable = import nixpkgs-unstable { inherit system; };
+      in
       nixpkgs.lib.nixosSystem {
         inherit system modules;
+        specialArgs = { inherit pkgsUnstable self; };
       };
     mkDarwinSystem = { system, modules }:
       let

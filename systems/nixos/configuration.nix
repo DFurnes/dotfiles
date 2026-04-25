@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, pkgsUnstable, lib, ... }:
 
 {
   imports = [
@@ -52,6 +52,7 @@
   # System programs:
   programs.zsh.enable = true;
   programs.firefox.enable = true;
+  programs.firefox.package = pkgsUnstable.firefox; # less delayed stable channel updates
 
   programs._1password.enable = true;
   programs._1password-gui = {
@@ -144,8 +145,8 @@
   boot.initrd.systemd.enable = true;
 
   # Linux kernel:
-  boot.kernelPackages = pkgs.linuxPackages_6_18; # updating from default LTS due to amdgpu bugs
-  boot.kernelParams = [ "amdgpu.gfxoff=0" ]; # SMU hangs when exiting gfxoff power state (RX 6700 XT)
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.kernelParams = [ "amdgpu.runpm=0" ]; # attempting to fix AMD power state issues
 
   # Desktop environment:
   services.xserver.enable = true;
