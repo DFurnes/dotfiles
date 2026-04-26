@@ -26,7 +26,7 @@
   let
     mkNixosSystem = { system, modules }:
       let
-        pkgsUnstable = import nixpkgs-unstable { inherit system; };
+        pkgsUnstable = import nixpkgs-unstable { inherit system; config.allowUnfree = true; };
       in
       nixpkgs.lib.nixosSystem {
         inherit system modules;

@@ -27,7 +27,7 @@
   # To search: `$ nix search wget`
   environment.systemPackages = with pkgs; [
     _1password-gui
-    claude-code
+    pkgsUnstable.claude-code
     dropbox-cli
     dropbox-cli.nautilusExtension
     gnomeExtensions.appindicator
