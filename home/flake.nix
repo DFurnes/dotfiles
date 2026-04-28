@@ -79,6 +79,9 @@
         };
         
         "org/gnome/shell/keybindings" = {
+          screenshot = [ "Print" ];
+          show-screenshot-ui = [ "<Shift>Print" ];
+
           switch-to-application-1 = [ ]; # Conflict: Super+1
           switch-to-application-2 = [ ]; # Conflict: Super+2
           switch-to-application-3 = [ ]; # etc.
