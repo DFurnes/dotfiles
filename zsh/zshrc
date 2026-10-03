@@ -2,6 +2,13 @@
 # Executes commands at the start of an interactive session.
 #
 
+path=(
+  $HOME/.devbox/bin
+  $HOME/.local/bin
+  $HOME/bin
+  $path
+)
+
 # Quickly change directories (e.g. $ foo --> $ cd foo)
 setopt auto_cd 
 
@@ -22,6 +29,7 @@ setopt hist_reduce_blanks
 
 # FZF shell integration (homebrew):
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/fzf/shell/key-bindings.zsh ] && source /usr/share/fzf/shell/key-bindings.zsh
 
 # FZF shell integration (nix):
 if [ -n "${commands[fzf-share]}" ]; then

@@ -12,7 +12,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 fi
 
 # Editors
-export EDITOR='vim'
+export EDITOR='vi'
 if [ -x "$(command -v nvim)" ]; then
   export EDITOR='nvim'
 fi
@@ -22,12 +22,6 @@ export GIT_EDITOR="$EDITOR"
 export PAGER='less'
 
 export LESS='-i -R -w -F'
-
-# Paths
-path=(
-  $HOME/bin
-  $path
-)
 
 # Set the the list of directories that cd searches.
 cdpath=(

@@ -11,6 +11,11 @@ success_symbol="[λ](bold)"
 error_symbol="[⚑](red)"
 vimcmd_symbol="[λ](bold fg:40)"
 
+[hostname]
+ssh_only=false
+style='bold dimmed'
+format='[$hostname]($style): '
+
 [directory]
 truncation_length=1
 format='[$path]($style)'
