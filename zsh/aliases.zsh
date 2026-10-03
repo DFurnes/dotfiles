@@ -84,6 +84,9 @@ function chownme() { sudo chown -R $(whoami) $*}
 
 # OS X
 # ----
+if [[ "$OSTYPE" == linux* ]] && ! command -v open > /dev/null; then
+  function open() { for f in "$@"; do xdg-open "$f"; done } # xdg-open takes one arg at a time
+fi
 function oo() { open ${*:-"."} }
 function port() { sudo lsof -i :$*; } # check what's running on this port
 function trash() { mv $1 ~/.Trash } # move file to the trash
